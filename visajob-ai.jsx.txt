@@ -1,0 +1,454 @@
+import { useState } from "react";
+
+const COUNTRIES = [
+  { code: "Germany", flag: "🇩🇪" },
+  { code: "Netherlands", flag: "🇳🇱" },
+  { code: "Poland", flag: "🇵🇱" },
+  { code: "Portugal", flag: "🇵🇹" },
+  { code: "Sweden", flag: "🇸🇪" },
+  { code: "United Kingdom", flag: "🇬🇧" },
+  { code: "Denmark", flag: "🇩🇰" },
+  { code: "France", flag: "🇫🇷" },
+];
+
+const CATEGORIES = [
+  { label: "Software / IT", icon: "💻", query: "software developer" },
+  { label: "Engineering", icon: "⚙️", query: "mechanical engineer" },
+  { label: "Healthcare / Nursing", icon: "🏥", query: "nurse healthcare" },
+  { label: "Accounting / Finance", icon: "📊", query: "accountant finance" },
+  { label: "Construction", icon: "🏗️", query: "construction worker" },
+  { label: "Hospitality", icon: "🏨", query: "hotel hospitality" },
+  { label: "Education / Teaching", icon: "📚", query: "teacher education" },
+  { label: "Logistics / Driving", icon: "🚛", query: "truck driver logistics" },
+];
+
+const VISA_INFO = {
+  Germany: { visa: "EU Blue Card / Skilled Worker Visa", minSalary: "€45,000/yr", lang: "B1 German preferred" },
+  Netherlands: { visa: "Highly Skilled Migrant Visa", minSalary: "€46,000/yr", lang: "English OK" },
+  Poland: { visa: "Work Permit (Zezwolenie)", minSalary: "€18,000/yr", lang: "Polish helpful" },
+  Portugal: { visa: "D3 Tech Visa / Work Visa", minSalary: "€20,000/yr", lang: "English OK" },
+  Sweden: { visa: "Work Permit (Arbetstillstånd)", minSalary: "€30,000/yr", lang: "English OK" },
+  "United Kingdom": { visa: "Skilled Worker Visa", minSalary: "£26,200/yr", lang: "English required" },
+  Denmark: { visa: "Positive List / Pay Limit Scheme", minSalary: "€60,000/yr", lang: "English OK" },
+  France: { visa: "Talent Passport / Work Visa", minSalary: "€35,000/yr", lang: "French preferred" },
+};
+
+export default function VisaJobAI() {
+  const [step, setStep] = useState("home"); // home | results | detail
+  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
+  const [error, setError] = useState(null);
+
+  const fetchJobs = async () => {
+    if (!selectedCountry || !selectedCategory) return;
+    setLoading(true);
+    setError(null);
+    setJobs([]);
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-6",
+          max_tokens: 1000,
+          system: `You are a job data generator for a visa-sponsored jobs platform targeting South Asian job seekers looking for work in Europe. 
+Generate realistic job listings. Respond ONLY with a valid JSON array — no markdown, no explanation, no backticks.
+Each job object must have these exact keys:
+- id (number)
+- title (string)
+- company (string, realistic European company name)
+- location (string, city + country)
+- salary (string, e.g. "€45,000 - €55,000/year")
+- type (string: "Full-time" or "Part-time")
+- visaSponsored (boolean, always true)
+- posted (string, e.g. "2 days ago")
+- description (string, 2 sentence job description)
+- requirements (array of 4 strings)
+- applyUrl (string, realistic company careers URL)`,
+          messages: [
+            {
+              role: "user",
+              content: `Generate 6 realistic visa-sponsored job listings for "${selectedCategory.query}" jobs in ${selectedCountry}. Make them look authentic with real-sounding European companies.`,
+            },
+          ],
+        }),
+      });
+
+      const data = await response.json();
+      const text = data.content?.map((c) => c.text || "").join("") || "";
+      const clean = text.replace(/```json|```/g, "").trim();
+      const parsed = JSON.parse(clean);
+      setJobs(parsed);
+      setStep("results");
+    } catch (err) {
+      setError("Jobs load nahi hue. Dobara try karein.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const visaDetails = selectedCountry ? VISA_INFO[selectedCountry] : null;
+
+  // ─── HOME ───────────────────────────────────────────────────────────────────
+  if (step === "home") {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0b0f1a", fontFamily: "'Inter', sans-serif", color: "#e8eaf0" }}>
+        {/* Header */}
+        <header style={{ borderBottom: "1px solid #1e2436", padding: "18px 24px", display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ width: 32, height: 32, background: "linear-gradient(135deg, #3b82f6, #8b5cf6)", borderRadius: 8, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16 }}>✈</div>
+          <span style={{ fontWeight: 700, fontSize: 18, letterSpacing: "-0.3px" }}>VisaJob <span style={{ color: "#3b82f6" }}>AI</span></span>
+          <span style={{ marginLeft: "auto", fontSize: 12, color: "#4b5680", background: "#131929", border: "1px solid #1e2436", padding: "4px 10px", borderRadius: 20 }}>Pakistan 🇵🇰 · India 🇮🇳 · BD 🇧🇩</span>
+        </header>
+
+        <div style={{ maxWidth: 680, margin: "0 auto", padding: "48px 24px" }}>
+          {/* Hero */}
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <div style={{ display: "inline-block", background: "#131929", border: "1px solid #1e2436", borderRadius: 20, padding: "6px 16px", fontSize: 12, color: "#3b82f6", marginBottom: 20 }}>
+              🌍 Europe mein job dhundho — visa ke saath
+            </div>
+            <h1 style={{ fontSize: 42, fontWeight: 800, lineHeight: 1.15, margin: "0 0 16px", letterSpacing: "-1px" }}>
+              Europe ki <span style={{ background: "linear-gradient(90deg, #3b82f6, #8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>Visa Sponsored</span> Jobs
+            </h1>
+            <p style={{ color: "#6b7aa1", fontSize: 16, lineHeight: 1.6, margin: 0 }}>
+              Pakistan, India, Bangladesh se log — apni field aur country choose karo, AI tumhare liye jobs dhundhega
+            </p>
+          </div>
+
+          {/* Step 1 — Country */}
+          <div style={{ marginBottom: 32 }}>
+            <div style={{ fontSize: 12, color: "#4b5680", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>
+              Step 1 — Konsi country?
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 8 }}>
+              {COUNTRIES.map((c) => (
+                <button
+                  key={c.code}
+                  onClick={() => setSelectedCountry(c.code)}
+                  style={{
+                    background: selectedCountry === c.code ? "linear-gradient(135deg, #1e3a8a22, #1e2a5a)" : "#131929",
+                    border: selectedCountry === c.code ? "1.5px solid #3b82f6" : "1.5px solid #1e2436",
+                    borderRadius: 10,
+                    padding: "12px 8px",
+                    cursor: "pointer",
+                    color: selectedCountry === c.code ? "#93c5fd" : "#8892b0",
+                    fontSize: 12,
+                    fontWeight: 500,
+                    textAlign: "center",
+                    transition: "all 0.15s",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  <span style={{ fontSize: 22 }}>{c.flag}</span>
+                  <span>{c.code}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Step 2 — Category */}
+          <div style={{ marginBottom: 36 }}>
+            <div style={{ fontSize: 12, color: "#4b5680", fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", marginBottom: 12 }}>
+              Step 2 — Tumhari field?
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 8 }}>
+              {CATEGORIES.map((cat) => (
+                <button
+                  key={cat.label}
+                  onClick={() => setSelectedCategory(cat)}
+                  style={{
+                    background: selectedCategory?.label === cat.label ? "linear-gradient(135deg, #1e3a8a22, #1e2a5a)" : "#131929",
+                    border: selectedCategory?.label === cat.label ? "1.5px solid #3b82f6" : "1.5px solid #1e2436",
+                    borderRadius: 10,
+                    padding: "14px 16px",
+                    cursor: "pointer",
+                    color: selectedCategory?.label === cat.label ? "#93c5fd" : "#8892b0",
+                    fontSize: 13,
+                    fontWeight: 500,
+                    textAlign: "left",
+                    transition: "all 0.15s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                  }}
+                >
+                  <span style={{ fontSize: 20 }}>{cat.icon}</span>
+                  {cat.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Visa Info Preview */}
+          {visaDetails && (
+            <div style={{ background: "#0d1320", border: "1px solid #1a2540", borderRadius: 12, padding: "16px 20px", marginBottom: 28, display: "flex", gap: 24, flexWrap: "wrap" }}>
+              <div>
+                <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Visa Type</div>
+                <div style={{ fontSize: 13, color: "#93c5fd" }}>{visaDetails.visa}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Min. Salary</div>
+                <div style={{ fontSize: 13, color: "#6ee7b7" }}>{visaDetails.minSalary}</div>
+              </div>
+              <div>
+                <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 4 }}>Language</div>
+                <div style={{ fontSize: 13, color: "#fbbf24" }}>{visaDetails.lang}</div>
+              </div>
+            </div>
+          )}
+
+          {/* Search Button */}
+          <button
+            onClick={fetchJobs}
+            disabled={!selectedCountry || !selectedCategory || loading}
+            style={{
+              width: "100%",
+              padding: "16px",
+              background: selectedCountry && selectedCategory ? "linear-gradient(135deg, #3b82f6, #8b5cf6)" : "#1e2436",
+              border: "none",
+              borderRadius: 12,
+              color: selectedCountry && selectedCategory ? "#fff" : "#3d4a6a",
+              fontSize: 15,
+              fontWeight: 700,
+              cursor: selectedCountry && selectedCategory ? "pointer" : "not-allowed",
+              letterSpacing: "-0.2px",
+              transition: "opacity 0.15s",
+            }}
+          >
+            {loading ? "⏳ AI Jobs Dhundh Raha Hai..." : "🔍 Jobs Dhundho"}
+          </button>
+
+          {error && (
+            <div style={{ marginTop: 16, background: "#1a0d0d", border: "1px solid #4a1a1a", borderRadius: 10, padding: "12px 16px", color: "#f87171", fontSize: 13 }}>
+              ⚠️ {error}
+            </div>
+          )}
+
+          {/* Stats */}
+          <div style={{ display: "flex", justifyContent: "center", gap: 32, marginTop: 40, paddingTop: 32, borderTop: "1px solid #1e2436" }}>
+            {[["8", "Countries"], ["50K+", "Job Seekers"], ["Free", "Always"]].map(([val, label]) => (
+              <div key={label} style={{ textAlign: "center" }}>
+                <div style={{ fontSize: 22, fontWeight: 800, color: "#3b82f6" }}>{val}</div>
+                <div style={{ fontSize: 11, color: "#4b5680", marginTop: 2 }}>{label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── JOB DETAIL ─────────────────────────────────────────────────────────────
+  if (step === "detail" && selectedJob) {
+    return (
+      <div style={{ minHeight: "100vh", background: "#0b0f1a", fontFamily: "'Inter', sans-serif", color: "#e8eaf0" }}>
+        <header style={{ borderBottom: "1px solid #1e2436", padding: "18px 24px", display: "flex", alignItems: "center", gap: 10 }}>
+          <button onClick={() => setStep("results")} style={{ background: "none", border: "none", color: "#3b82f6", cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
+            ← Wapas
+          </button>
+          <div style={{ width: 1, height: 16, background: "#1e2436", margin: "0 4px" }} />
+          <span style={{ fontWeight: 700, fontSize: 16 }}>VisaJob <span style={{ color: "#3b82f6" }}>AI</span></span>
+        </header>
+
+        <div style={{ maxWidth: 640, margin: "0 auto", padding: "32px 24px" }}>
+          <div style={{ background: "#131929", border: "1px solid #1e2436", borderRadius: 16, padding: "28px" }}>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 20, flexWrap: "wrap", gap: 12 }}>
+              <div>
+                <h2 style={{ margin: "0 0 6px", fontSize: 22, fontWeight: 700 }}>{selectedJob.title}</h2>
+                <div style={{ color: "#6b7aa1", fontSize: 14 }}>{selectedJob.company} · {selectedJob.location}</div>
+              </div>
+              <span style={{ background: "#0f2a1a", border: "1px solid #166534", color: "#6ee7b7", padding: "4px 12px", borderRadius: 20, fontSize: 12, fontWeight: 600, whiteSpace: "nowrap" }}>
+                ✅ Visa Sponsored
+              </span>
+            </div>
+
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginBottom: 24 }}>
+              {[selectedJob.salary, selectedJob.type, selectedJob.posted].map((tag, i) => (
+                <span key={i} style={{ background: "#0d1320", border: "1px solid #1e2436", color: "#8892b0", padding: "5px 12px", borderRadius: 20, fontSize: 12 }}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Job Details</div>
+              <p style={{ color: "#8892b0", fontSize: 14, lineHeight: 1.7, margin: 0 }}>{selectedJob.description}</p>
+            </div>
+
+            <div style={{ marginBottom: 28 }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 10 }}>Requirements</div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {selectedJob.requirements?.map((req, i) => (
+                  <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 8, color: "#8892b0", fontSize: 14 }}>
+                    <span style={{ color: "#3b82f6", marginTop: 1 }}>→</span>
+                    {req}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {visaDetails && (
+              <div style={{ background: "#0d1320", border: "1px solid #1a2540", borderRadius: 12, padding: "16px", marginBottom: 24 }}>
+                <div style={{ fontSize: 12, fontWeight: 600, color: "#3b82f6", marginBottom: 12 }}>🛂 {selectedCountry} Visa Info</div>
+                <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
+                  <div>
+                    <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Visa</div>
+                    <div style={{ fontSize: 13, color: "#93c5fd" }}>{visaDetails.visa}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Min. Salary</div>
+                    <div style={{ fontSize: 13, color: "#6ee7b7" }}>{visaDetails.minSalary}</div>
+                  </div>
+                  <div>
+                    <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Language</div>
+                    <div style={{ fontSize: 13, color: "#fbbf24" }}>{visaDetails.lang}</div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            <a
+              href={selectedJob.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                width: "100%",
+                padding: "14px",
+                background: "linear-gradient(135deg, #3b82f6, #8b5cf6)",
+                borderRadius: 10,
+                color: "#fff",
+                fontSize: 14,
+                fontWeight: 700,
+                textAlign: "center",
+                textDecoration: "none",
+                boxSizing: "border-box",
+              }}
+            >
+              Apply Now — Company Website ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ─── RESULTS ────────────────────────────────────────────────────────────────
+  return (
+    <div style={{ minHeight: "100vh", background: "#0b0f1a", fontFamily: "'Inter', sans-serif", color: "#e8eaf0" }}>
+      <header style={{ borderBottom: "1px solid #1e2436", padding: "18px 24px", display: "flex", alignItems: "center", gap: 10 }}>
+        <button onClick={() => { setStep("home"); setJobs([]); }} style={{ background: "none", border: "none", color: "#3b82f6", cursor: "pointer", fontSize: 14, display: "flex", alignItems: "center", gap: 6 }}>
+          ← Wapas
+        </button>
+        <div style={{ width: 1, height: 16, background: "#1e2436", margin: "0 4px" }} />
+        <span style={{ fontWeight: 700, fontSize: 16 }}>VisaJob <span style={{ color: "#3b82f6" }}>AI</span></span>
+      </header>
+
+      <div style={{ maxWidth: 680, margin: "0 auto", padding: "32px 24px" }}>
+        {/* Results Header */}
+        <div style={{ marginBottom: 28 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
+            <span style={{ fontSize: 20 }}>{COUNTRIES.find(c => c.code === selectedCountry)?.flag}</span>
+            <h2 style={{ margin: 0, fontSize: 20, fontWeight: 700 }}>{selectedCategory?.label} Jobs — {selectedCountry}</h2>
+          </div>
+          <div style={{ color: "#4b5680", fontSize: 13 }}>
+            {jobs.length} visa-sponsored jobs mili hain · AI-generated listings
+          </div>
+        </div>
+
+        {/* Visa Banner */}
+        {visaDetails && (
+          <div style={{ background: "#0d1320", border: "1px solid #1a2540", borderRadius: 12, padding: "14px 18px", marginBottom: 24, display: "flex", gap: 24, flexWrap: "wrap" }}>
+            <div>
+              <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Visa</div>
+              <div style={{ fontSize: 12, color: "#93c5fd" }}>{visaDetails.visa}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Min. Salary</div>
+              <div style={{ fontSize: 12, color: "#6ee7b7" }}>{visaDetails.minSalary}</div>
+            </div>
+            <div>
+              <div style={{ fontSize: 10, color: "#4b5680", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 3 }}>Language</div>
+              <div style={{ fontSize: 12, color: "#fbbf24" }}>{visaDetails.lang}</div>
+            </div>
+          </div>
+        )}
+
+        {/* Job Cards */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+          {jobs.map((job) => (
+            <div
+              key={job.id}
+              onClick={() => { setSelectedJob(job); setStep("detail"); }}
+              style={{
+                background: "#131929",
+                border: "1px solid #1e2436",
+                borderRadius: 14,
+                padding: "20px",
+                cursor: "pointer",
+                transition: "border-color 0.15s",
+              }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "#3b82f6"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#1e2436"}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10, gap: 10 }}>
+                <div>
+                  <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 3 }}>{job.title}</div>
+                  <div style={{ color: "#6b7aa1", fontSize: 13 }}>{job.company}</div>
+                </div>
+                <span style={{ background: "#0f2a1a", border: "1px solid #166534", color: "#6ee7b7", padding: "3px 10px", borderRadius: 20, fontSize: 11, fontWeight: 600, whiteSpace: "nowrap" }}>
+                  ✅ Visa
+                </span>
+              </div>
+
+              <div style={{ display: "flex", gap: 6, flexWrap: "wrap", marginBottom: 12 }}>
+                <span style={{ background: "#0d1320", border: "1px solid #1e2436", color: "#8892b0", padding: "3px 10px", borderRadius: 20, fontSize: 11 }}>
+                  📍 {job.location}
+                </span>
+                <span style={{ background: "#0d1320", border: "1px solid #1e2436", color: "#8892b0", padding: "3px 10px", borderRadius: 20, fontSize: 11 }}>
+                  💰 {job.salary}
+                </span>
+                <span style={{ background: "#0d1320", border: "1px solid #1e2436", color: "#8892b0", padding: "3px 10px", borderRadius: 20, fontSize: 11 }}>
+                  🕐 {job.posted}
+                </span>
+              </div>
+
+              <p style={{ color: "#6b7aa1", fontSize: 13, lineHeight: 1.6, margin: "0 0 12px" }}>
+                {job.description?.substring(0, 100)}...
+              </p>
+
+              <div style={{ color: "#3b82f6", fontSize: 13, fontWeight: 600 }}>
+                Details dekhein →
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Search Again */}
+        <button
+          onClick={() => { setStep("home"); setJobs([]); setSelectedJob(null); }}
+          style={{
+            width: "100%",
+            marginTop: 24,
+            padding: "13px",
+            background: "transparent",
+            border: "1.5px solid #1e2436",
+            borderRadius: 10,
+            color: "#6b7aa1",
+            fontSize: 14,
+            fontWeight: 600,
+            cursor: "pointer",
+          }}
+        >
+          ← Naya Search
+        </button>
+      </div>
+    </div>
+  );
+}

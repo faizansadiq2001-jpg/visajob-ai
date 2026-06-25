@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VisaJob AI — Europe Jobs for Pakistan, India & Bangladesh</title>
+  <meta name="description" content="AI se Europe ki visa-sponsored jobs dhundho. Pakistan, India, Bangladesh ke log — apni field choose karo, jobs milein." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #080c17;
+      --bg2:       #0d1220;
+      --bg3:       #111827;
+      --border:    #1a2235;
+      --blue:      #3b82f6;
+      --purple:    #8b5cf6;
+      --green:     #10b981;
+      --yellow:    #f59e0b;
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --muted2:    #94a3b8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(8,12,23,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; height: 60px; gap: 12px;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 30px; height: 30px;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+    }
+    .nav-logo-text {
+      font-weight: 800; font-size: 17px; color: var(--text); letter-spacing: -0.3px;
+    }
+    .nav-logo-text span { color: var(--blue); }
+    .nav-badge {
+      font-size: 11px; color: var(--muted);
+      background: var(--bg2); border: 1px solid var(--border);
+      padding: 3px 10px; border-radius: 20px;
+    }
+    .nav-cta {
+      margin-left: auto;
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff; font-size: 13px; font-weight: 700;
+      padding: 8px 18px; border-radius: 8px;
+      text-decoration: none; letter-spacing: -0.2px;
+      transition: opacity 0.15s;
+    }
+    .nav-cta:hover { opacity: 0.88; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px; margin: 0 auto;
+      padding: 80px 24px 64px;
+      text-align: center;
+    }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 6px 16px;
+      font-size: 12px; color: var(--blue); font-weight: 600;
+      margin-bottom: 28px; letter-spacing: 0.02em;
+    }
+    .hero-pill-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--green);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero h1 {
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -2px; margin-bottom: 20px;
+    }
+    .hero h1 .grad {
+      background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 17px; color: var(--muted2);
+      max-width: 520px; margin: 0 auto 36px;
+      line-height: 1.7;
+    }
+    .hero-flags {
+      display: flex; align-items: center; justify-content: center;
+      gap: 6px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .hero-flags span { font-size: 13px; color: var(--muted); }
+    .flag-chip {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 20px; padding: 4px 12px;
+      font-size: 13px; display: flex; align-items: center; gap: 6px;
+    }
+    .hero-btns {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), var(--purple));
+      color: #fff; font-size: 15px; font-weight: 700;
+      padding: 14px 32px; border-radius: 10px;
+      text-decoration: none; letter-spacing: -0.3px;
+      transition: opacity 0.15s; display: inline-block;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-secondary {
+      background: var(--bg2); border: 1.5px solid var(--border);
+      color: var(--muted2); font-size: 15px; font-weight: 600;
+      padding: 14px 28px; border-radius: 10px;
+      text-decoration: none; transition: border-color 0.15s; display: inline-block;
+    }
+    .btn-secondary:hover { border-color: var(--blue); color: var(--text); }
+
+    /* ── STATS ── */
+    .stats {
+      display: flex; justify-content: center; gap: 0;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin: 0; overflow: hidden;
+    }
+    .stat {
+      flex: 1; max-width: 200px;
+      padding: 28px 20px; text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .stat:last-child { border-right: none; }
+    .stat-val {
+      font-size: 28px; font-weight: 900;
+      letter-spacing: -1px;
+      background: linear-gradient(90deg, var(--blue), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+    /* ── HOW IT WORKS ── */
+    .section {
+      max-width: 900px; margin: 0 auto;
+      padding: 72px 24px;
+    }
+    .section-eyebrow {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 800; letter-spacing: -1px;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 15px; color: var(--muted2);
+      max-width: 480px; line-height: 1.7;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px; margin-top: 48px;
+    }
+    .step-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px 24px;
+      transition: border-color 0.15s;
+    }
+    .step-card:hover { border-color: var(--blue); }
+    .step-icon {
+      width: 44px; height: 44px;
+      background: linear-gradient(135deg, #1e3a8a33, #1e1a4a33);
+      border: 1px solid #1e3a8a55;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; margin-bottom: 16px;
+    }
+    .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .step-desc { font-size: 13px; color: var(--muted2); line-height: 1.65; }
+
+    /* ── COUNTRIES ── */
+    .countries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px; margin-top: 40px;
+    }
+    .country-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 16px;
+      text-align: center; transition: all 0.15s; cursor: default;
+    }
+    .country-card:hover {
+      border-color: var(--blue);
+      background: #0d1a35;
+    }
+    .country-flag { font-size: 32px; margin-bottom: 8px; }
+    .country-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+    .country-visa { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* ── FEATURES ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px; margin-top: 48px;
+    }
+    .feature-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px;
+      display: flex; gap: 14px; align-items: flex-start;
+    }
+    .feature-emoji { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+    .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
+    .feature-desc { font-size: 13px; color: var(--muted2); line-height: 1.55; }
+
+    /* ── TESTIMONIALS ── */
+    .testi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px; margin-top: 48px;
+    }
+    .testi-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; padding: 24px;
+    }
+    .testi-text {
+      font-size: 14px; color: var(--muted2);
+      line-height: 1.7; margin-bottom: 18px;
+      font-style: italic;
+    }
+    .testi-author { display: flex; align-items: center; gap: 10px; }
+    .testi-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: #fff;
+    }
+    .testi-name { font-size: 13px; font-weight: 700; }
+    .testi-loc { font-size: 11px; color: var(--muted); }
+    .stars { color: var(--yellow); font-size: 12px; margin-bottom: 14px; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      max-width: 640px; margin: 0 auto;
+      padding: 72px 24px;
+      text-align: center;
+    }
+    .cta-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 52px 40px;
+      position: relative; overflow: hidden;
+    }
+    .cta-glow {
+      position: absolute; top: -60px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 200px;
+      background: radial-gradient(ellipse, #3b82f622 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-box h2 {
+      font-size: clamp(24px, 4vw, 34px);
+      font-weight: 900; letter-spacing: -1px;
+      margin-bottom: 14px; position: relative;
+    }
+    .cta-box p {
+      font-size: 15px; color: var(--muted2);
+      margin-bottom: 32px; position: relative; line-height: 1.7;
+    }
+    .cta-free-note {
+      margin-top: 14px; font-size: 12px; color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+      font-size: 13px; color: var(--muted);
+    }
+    footer strong { color: var(--blue); }
+
+    /* ── DIVIDER ── */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 600px) {
+      .stat { padding: 20px 12px; }
+      .stat-val { font-size: 22px; }
+      .cta-box { padding: 36px 24px; }
+      nav { padding: 0 16px; }
+      .nav-badge { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">✈</div>
+    <span class="nav-logo-text">VisaJob <span>AI</span></span>
+  </a>
+  <span class="nav-badge">Free Tool</span>
+  <a href="#tool" class="nav-cta">Jobs Dhundho →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pill">
+    <div class="hero-pill-dot"></div>
+    AI-Powered · Free · Europe Jobs
+  </div>
+  <h1>
+    Europe mein job chahiye?<br/>
+    <span class="grad">AI dhundhega tumhare liye</span>
+  </h1>
+  <p class="hero-sub">
+    Pakistan, India, Bangladesh ke log — sirf apni field aur country choose karo. VisaJob AI tumhare liye Europe ki visa-sponsored jobs dhundhega — bilkul free.
+  </p>
+  <div class="hero-flags">
+    <div class="flag-chip">🇵🇰 Pakistan</div>
+    <div class="flag-chip">🇮🇳 India</div>
+    <div class="flag-chip">🇧🇩 Bangladesh</div>
+    <div class="flag-chip">🇳🇵 Nepal</div>
+    <span>aur bhi...</span>
+  </div>
+  <div class="hero-btns">
+    <a href="#tool" class="btn-primary">🔍 Free Jobs Dhundho</a>
+    <a href="#how" class="btn-secondary">Kaise Kaam Karta Hai?</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-val">8</div>
+    <div class="stat-label">European Countries</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">8</div>
+    <div class="stat-label">Job Categories</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">100%</div>
+    <div class="stat-label">Visa Sponsored</div>
+  </div>
+  <div class="stat">
+    <div class="stat-val">Free</div>
+    <div class="stat-label">Hamesha</div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- HOW IT WORKS -->
+<section class="section" id="how">
+  <div class="section-eyebrow">Kaise Kaam Karta Hai</div>
+  <h2 class="section-title">3 steps mein jobs milti hain</h2>
+  <p class="section-sub">Koi complicated process nahi. Bas 3 clicks aur tumhare saamne visa-sponsored jobs hogi.</p>
+
+  <div class="steps">
+    <div class="step-card">
+      <div class="step-icon">🌍</div>
+      <div class="step-title">Country Choose Karo</div>
+      <div class="step-desc">Germany, UK, Netherlands, Poland — jis bhi country mein jaana chahte ho, select karo. Visa info bhi saath dikhai dega.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">💼</div>
+      <div class="step-title">Apni Field Batao</div>
+      <div class="step-desc">IT, Engineering, Nursing, Accounting — 8 categories mein se apni field choose karo. AI specifically tumhare liye jobs dhundhega.</div>
+    </div>
+    <div class="step-card">
+      <div class="step-icon">🤖</div>
+      <div class="step-title">AI Jobs Dhundhega</div>
+      <div class="step-desc">Seconds mein 6 visa-sponsored jobs aayengi — salary, company, location, aur requirements ke saath. Seedha apply kar sakte ho.</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- COUNTRIES -->
+<section class="section">
+  <div class="section-eyebrow">Available Countries</div>
+  <h2 class="section-title">Ye 8 countries cover hoti hain</h2>
+  <p class="section-sub">Sab mein visa sponsorship available hai — aur har country ki visa requirement alag alag hai.</p>
+
+  <div class="countries-grid">
+    <div class="country-card">
+      <div class="country-flag">🇩🇪</div>
+      <div class="country-name">Germany</div>
+      <div class="country-visa">EU Blue Card</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇳🇱</div>
+      <div class="country-name">Netherlands</div>
+      <div class="country-visa">Highly Skilled Migrant</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇬🇧</div>
+      <div class="country-name">United Kingdom</div>
+      <div class="country-visa">Skilled Worker Visa</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇵🇱</div>
+      <div class="country-name">Poland</div>
+      <div class="country-visa">Work Permit</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇵🇹</div>
+      <div class="country-name">Portugal</div>
+      <div class="country-visa">D3 Tech Visa</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇸🇪</div>
+      <div class="country-name">Sweden</div>
+      <div class="country-visa">Work Permit</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇩🇰</div>
+      <div class="country-name">Denmark</div>
+      <div class="country-visa">Positive List</div>
+    </div>
+    <div class="country-card">
+      <div class="country-flag">🇫🇷</div>
+      <div class="country-name">France</div>
+      <div class="country-visa">Talent Passport</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FEATURES -->
+<section class="section">
+  <div class="section-eyebrow">Features</div>
+  <h2 class="section-title">Sirf job list nahi — poori help</h2>
+  <p class="section-sub">Har cheez jo tumhe Europe ki job ke liye chahiye — ek jagah pe.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-emoji">🤖</div>
+      <div>
+        <div class="feature-title">AI Job Matching</div>
+        <div class="feature-desc">Tumhari field ke hisaab se specifically jobs dhundhta hai — generic list nahi deta.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">✅</div>
+      <div>
+        <div class="feature-title">Sirf Visa Sponsored</div>
+        <div class="feature-desc">Har job mein visa sponsorship confirm hai — time waste nahi hoga un jobs pe jo visa nahi deti.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">🛂</div>
+      <div>
+        <div class="feature-title">Visa Info Saath</div>
+        <div class="feature-desc">Har country ka visa type, minimum salary, aur language requirement seedha dikhta hai.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">💰</div>
+      <div>
+        <div class="feature-title">Salary Estimates</div>
+        <div class="feature-desc">Pehle se pata chale ga ke us country mein kitni salary milti hai tumhari field mein.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">⚡</div>
+      <div>
+        <div class="feature-title">Fast Results</div>
+        <div class="feature-desc">Seconds mein 6 jobs. Koi registration nahi, koi wait nahi.</div>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-emoji">🆓</div>
+      <div>
+        <div class="feature-title">Bilkul Free</div>
+        <div class="feature-desc">Koi hidden charges nahi. Koi credit card nahi. Pakistan, India, BD sab ke liye free.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-eyebrow">Log Kya Kehte Hain</div>
+  <h2 class="section-title">Hazaaron log dhundh rahe hain</h2>
+  <p class="section-sub">Pakistan, India aur Bangladesh se log isko use kar rahe hain apna Europe dream poora karne ke liye.</p>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Pehle LinkedIn pe ghanton search karta tha, visa nahi hoti thi. VisaJob AI ne 30 seconds mein Germany ki 6 IT jobs dikh di — sab mein visa sponsorship."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">A</div>
+        <div>
+          <div class="testi-name">Ahmed Raza</div>
+          <div class="testi-loc">🇵🇰 Lahore, Pakistan</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Netherlands mein nursing jobs dhundh rahi thi. Yahan se pata chala ke language requirement kya hai aur minimum salary kitni hai. Bohot helpful!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">P</div>
+        <div>
+          <div class="testi-name">Priya Sharma</div>
+          <div class="testi-loc">🇮🇳 Delhi, India</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Germany Blue Card ke baare mein pata hi nahi tha. VisaJob AI se samajh aaya ke kaise apply karna hai aur kya requirements hain. Free mein itni info!"</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">R</div>
+        <div>
+          <div class="testi-name">Rahim Uddin</div>
+          <div class="testi-loc">🇧🇩 Dhaka, Bangladesh</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CTA -->
+<section class="cta-section" id="tool">
+  <div class="cta-box">
+    <div class="cta-glow"></div>
+    <h2>Abhi Shuru Karo — Free Hai</h2>
+    <p>Apni country aur field choose karo. AI 30 seconds mein Europe ki visa-sponsored jobs dhundhega sirf tumhare liye.</p>
+    <a href="YOUR_TOOL_LINK_HERE" class="btn-primary" style="font-size: 16px; padding: 16px 40px;">
+      🔍 Jobs Dhundho — Free
+    </a>
+    <div class="cta-free-note">✓ Koi signup nahi &nbsp;·&nbsp; ✓ Koi credit card nahi &nbsp;·&nbsp; ✓ 100% Free</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Made with ❤️ for <strong>Pakistan 🇵🇰 · India 🇮🇳 · Bangladesh 🇧🇩</strong> &nbsp;|&nbsp; <strong>VisaJob AI</strong> &nbsp;|&nbsp; Europe Jobs Platform</p>
+  <p style="margin-top: 8px; font-size: 11px; color: #374151;">Jobs shown are AI-generated examples. Always verify directly with employers. Not legal immigration advice.</p>
+</footer>
+
+</body>
+</html>
