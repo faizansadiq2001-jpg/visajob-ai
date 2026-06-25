@@ -1,575 +1,358 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VisaJob AI — Europe Jobs for Pakistan, India & Bangladesh</title>
-  <meta name="description" content="AI se Europe ki visa-sponsored jobs dhundho. Pakistan, India, Bangladesh ke log — apni field choose karo, jobs milein." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #080c17; color: #e2e8f0; font-family: 'Inter', sans-serif; min-height: 100vh; }
 
-    :root {
-      --bg:        #080c17;
-      --bg2:       #0d1220;
-      --bg3:       #111827;
-      --border:    #1a2235;
-      --blue:      #3b82f6;
-      --purple:    #8b5cf6;
-      --green:     #10b981;
-      --yellow:    #f59e0b;
-      --text:      #e2e8f0;
-      --muted:     #64748b;
-      --muted2:    #94a3b8;
-    }
+    nav { position: sticky; top: 0; z-index: 100; background: rgba(8,12,23,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid #1a2235; padding: 0 20px; display: flex; align-items: center; height: 58px; gap: 10px; }
+    .logo-icon { width: 30px; height: 30px; background: linear-gradient(135deg,#3b82f6,#8b5cf6); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+    .logo-text { font-weight: 800; font-size: 17px; letter-spacing: -0.3px; }
+    .logo-text span { color: #3b82f6; }
+    .live-badge { margin-left: auto; font-size: 11px; color: #10b981; background: #0d1220; border: 1px solid #1a2235; padding: 3px 10px; border-radius: 20px; }
 
-    html { scroll-behavior: smooth; }
+    .page { display: none; max-width: 680px; margin: 0 auto; padding: 40px 20px; }
+    .page.active { display: block; }
 
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
+    /* HOME */
+    .hero { text-align: center; margin-bottom: 36px; }
+    .hero-pill { display: inline-flex; align-items: center; gap: 8px; background: #0d1220; border: 1px solid #1a2235; border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #3b82f6; font-weight: 600; margin-bottom: 20px; }
+    .pulse { width: 6px; height: 6px; border-radius: 50%; background: #10b981; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+    h1 { font-size: clamp(30px,6vw,50px); font-weight: 900; line-height: 1.1; margin-bottom: 14px; letter-spacing: -1.5px; }
+    .grad { background: linear-gradient(90deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { color: #64748b; font-size: 15px; line-height: 1.7; max-width: 460px; margin: 0 auto; }
 
-    /* ── NAV ── */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(8,12,23,0.85);
-      backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      display: flex; align-items: center; height: 60px; gap: 12px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: 10px; text-decoration: none;
-    }
-    .nav-logo-icon {
-      width: 30px; height: 30px;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px;
-    }
-    .nav-logo-text {
-      font-weight: 800; font-size: 17px; color: var(--text); letter-spacing: -0.3px;
-    }
-    .nav-logo-text span { color: var(--blue); }
-    .nav-badge {
-      font-size: 11px; color: var(--muted);
-      background: var(--bg2); border: 1px solid var(--border);
-      padding: 3px 10px; border-radius: 20px;
-    }
-    .nav-cta {
-      margin-left: auto;
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: #fff; font-size: 13px; font-weight: 700;
-      padding: 8px 18px; border-radius: 8px;
-      text-decoration: none; letter-spacing: -0.2px;
-      transition: opacity 0.15s;
-    }
-    .nav-cta:hover { opacity: 0.88; }
+    .step-label { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #475569; margin-bottom: 10px; margin-top: 28px; }
+    .countries-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .country-btn { background: #0d1220; border: 1.5px solid #1a2235; border-radius: 12px; padding: 14px 8px; cursor: pointer; color: #64748b; font-size: 12px; font-weight: 600; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 5px; transition: all .15s; font-family: inherit; }
+    .country-btn:hover, .country-btn.selected { background: #0f2040; border-color: #3b82f6; color: #93c5fd; }
+    .country-flag { font-size: 24px; }
+    .country-visa-label { font-size: 10px; color: #475569; font-weight: 400; }
 
-    /* ── HERO ── */
-    .hero {
-      max-width: 760px; margin: 0 auto;
-      padding: 80px 24px 64px;
-      text-align: center;
-    }
-    .hero-pill {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 20px; padding: 6px 16px;
-      font-size: 12px; color: var(--blue); font-weight: 600;
-      margin-bottom: 28px; letter-spacing: 0.02em;
-    }
-    .hero-pill-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: var(--green);
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-    .hero h1 {
-      font-size: clamp(36px, 6vw, 60px);
-      font-weight: 900; line-height: 1.1;
-      letter-spacing: -2px; margin-bottom: 20px;
-    }
-    .hero h1 .grad {
-      background: linear-gradient(90deg, var(--blue) 0%, var(--purple) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-sub {
-      font-size: 17px; color: var(--muted2);
-      max-width: 520px; margin: 0 auto 36px;
-      line-height: 1.7;
-    }
-    .hero-flags {
-      display: flex; align-items: center; justify-content: center;
-      gap: 6px; margin-bottom: 40px; flex-wrap: wrap;
-    }
-    .hero-flags span { font-size: 13px; color: var(--muted); }
-    .flag-chip {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 20px; padding: 4px 12px;
-      font-size: 13px; display: flex; align-items: center; gap: 6px;
-    }
-    .hero-btns {
-      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-    }
-    .btn-primary {
-      background: linear-gradient(135deg, var(--blue), var(--purple));
-      color: #fff; font-size: 15px; font-weight: 700;
-      padding: 14px 32px; border-radius: 10px;
-      text-decoration: none; letter-spacing: -0.3px;
-      transition: opacity 0.15s; display: inline-block;
-    }
-    .btn-primary:hover { opacity: 0.88; }
-    .btn-secondary {
-      background: var(--bg2); border: 1.5px solid var(--border);
-      color: var(--muted2); font-size: 15px; font-weight: 600;
-      padding: 14px 28px; border-radius: 10px;
-      text-decoration: none; transition: border-color 0.15s; display: inline-block;
-    }
-    .btn-secondary:hover { border-color: var(--blue); color: var(--text); }
+    .cats-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; }
+    .cat-btn { background: #0d1220; border: 1.5px solid #1a2235; border-radius: 10px; padding: 13px 14px; cursor: pointer; color: #64748b; font-size: 13px; font-weight: 600; text-align: left; display: flex; align-items: center; gap: 10px; transition: all .15s; font-family: inherit; }
+    .cat-btn:hover, .cat-btn.selected { background: #0f2040; border-color: #3b82f6; color: #93c5fd; }
 
-    /* ── STATS ── */
-    .stats {
-      display: flex; justify-content: center; gap: 0;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin: 0; overflow: hidden;
-    }
-    .stat {
-      flex: 1; max-width: 200px;
-      padding: 28px 20px; text-align: center;
-      border-right: 1px solid var(--border);
-    }
-    .stat:last-child { border-right: none; }
-    .stat-val {
-      font-size: 28px; font-weight: 900;
-      letter-spacing: -1px;
-      background: linear-gradient(90deg, var(--blue), var(--purple));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .stat-label { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .visa-info-bar { background: #0d1220; border: 1px solid #1a2235; border-radius: 12px; padding: 14px 18px; margin-top: 20px; display: none; gap: 20px; flex-wrap: wrap; }
+    .visa-info-bar.show { display: flex; }
+    .vib-item label { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 3px; }
+    .vib-item span { font-size: 12px; }
 
-    /* ── HOW IT WORKS ── */
-    .section {
-      max-width: 900px; margin: 0 auto;
-      padding: 72px 24px;
-    }
-    .section-eyebrow {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--blue); margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(26px, 4vw, 38px);
-      font-weight: 800; letter-spacing: -1px;
-      margin-bottom: 14px;
-    }
-    .section-sub {
-      font-size: 15px; color: var(--muted2);
-      max-width: 480px; line-height: 1.7;
-    }
+    .search-btn { width: 100%; padding: 15px; background: #1a2235; border: none; border-radius: 12px; color: #334155; font-size: 15px; font-weight: 700; cursor: not-allowed; margin-top: 20px; font-family: inherit; transition: all .15s; }
+    .search-btn.ready { background: linear-gradient(135deg,#3b82f6,#8b5cf6); color: #fff; cursor: pointer; }
 
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px; margin-top: 48px;
-    }
-    .step-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 16px; padding: 28px 24px;
-      transition: border-color 0.15s;
-    }
-    .step-card:hover { border-color: var(--blue); }
-    .step-icon {
-      width: 44px; height: 44px;
-      background: linear-gradient(135deg, #1e3a8a33, #1e1a4a33);
-      border: 1px solid #1e3a8a55;
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; margin-bottom: 16px;
-    }
-    .step-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
-    .step-desc { font-size: 13px; color: var(--muted2); line-height: 1.65; }
+    .error-box { margin-top: 14px; background: #1a0d0d; border: 1px solid #4a1a1a; border-radius: 10px; padding: 12px 16px; color: #f87171; font-size: 13px; display: none; }
+    .error-box.show { display: block; }
 
-    /* ── COUNTRIES ── */
-    .countries-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px; margin-top: 40px;
-    }
-    .country-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 14px; padding: 20px 16px;
-      text-align: center; transition: all 0.15s; cursor: default;
-    }
-    .country-card:hover {
-      border-color: var(--blue);
-      background: #0d1a35;
-    }
-    .country-flag { font-size: 32px; margin-bottom: 8px; }
-    .country-name { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-    .country-visa { font-size: 11px; color: var(--muted); line-height: 1.4; }
+    .home-stats { display: flex; justify-content: center; gap: 32px; margin-top: 36px; padding-top: 28px; border-top: 1px solid #1a2235; }
+    .stat-val { font-size: 20px; font-weight: 900; color: #3b82f6; text-align: center; }
+    .stat-lbl { font-size: 11px; color: #475569; margin-top: 2px; text-align: center; }
 
-    /* ── FEATURES ── */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px; margin-top: 48px;
-    }
-    .feature-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 14px; padding: 22px 20px;
-      display: flex; gap: 14px; align-items: flex-start;
-    }
-    .feature-emoji { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
-    .feature-title { font-size: 14px; font-weight: 700; margin-bottom: 5px; }
-    .feature-desc { font-size: 13px; color: var(--muted2); line-height: 1.55; }
+    /* RESULTS */
+    .results-header { margin-bottom: 20px; }
+    .results-title { font-size: 20px; font-weight: 800; margin-bottom: 4px; }
+    .results-sub { color: #475569; font-size: 13px; }
+    .visa-banner { background: #0d1220; border: 1px solid #1a2235; border-radius: 12px; padding: 12px 16px; margin-bottom: 18px; display: flex; gap: 20px; flex-wrap: wrap; }
+    .vb-item label { font-size: 10px; color: #475569; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 2px; }
+    .vb-item span { font-size: 12px; }
 
-    /* ── TESTIMONIALS ── */
-    .testi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 14px; margin-top: 48px;
-    }
-    .testi-card {
-      background: var(--bg2); border: 1px solid var(--border);
-      border-radius: 14px; padding: 24px;
-    }
-    .testi-text {
-      font-size: 14px; color: var(--muted2);
-      line-height: 1.7; margin-bottom: 18px;
-      font-style: italic;
-    }
-    .testi-author { display: flex; align-items: center; gap: 10px; }
-    .testi-avatar {
-      width: 36px; height: 36px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 800; color: #fff;
-    }
-    .testi-name { font-size: 13px; font-weight: 700; }
-    .testi-loc { font-size: 11px; color: var(--muted); }
-    .stars { color: var(--yellow); font-size: 12px; margin-bottom: 14px; }
+    .job-card { background: #0d1220; border: 1.5px solid #1a2235; border-radius: 14px; padding: 18px; margin-bottom: 10px; cursor: pointer; transition: border-color .15s; }
+    .job-card:hover { border-color: #3b82f6; }
+    .job-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+    .job-title { font-weight: 700; font-size: 14px; line-height: 1.3; margin-bottom: 3px; }
+    .job-company { color: #64748b; font-size: 12px; }
+    .real-badge { background: #0f2a1a; border: 1px solid #166534; color: #6ee7b7; padding: 2px 10px; border-radius: 20px; font-size: 10px; font-weight: 700; white-space: nowrap; flex-shrink: 0; }
+    .job-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+    .tag { background: #111827; border: 1px solid #1a2235; color: #64748b; padding: 2px 10px; border-radius: 20px; font-size: 11px; }
+    .job-desc { color: #475569; font-size: 12px; line-height: 1.6; margin-bottom: 10px; }
+    .job-cta { color: #3b82f6; font-size: 12px; font-weight: 700; }
 
-    /* ── CTA SECTION ── */
-    .cta-section {
-      max-width: 640px; margin: 0 auto;
-      padding: 72px 24px;
-      text-align: center;
-    }
-    .cta-box {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 52px 40px;
-      position: relative; overflow: hidden;
-    }
-    .cta-glow {
-      position: absolute; top: -60px; left: 50%;
-      transform: translateX(-50%);
-      width: 300px; height: 200px;
-      background: radial-gradient(ellipse, #3b82f622 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .cta-box h2 {
-      font-size: clamp(24px, 4vw, 34px);
-      font-weight: 900; letter-spacing: -1px;
-      margin-bottom: 14px; position: relative;
-    }
-    .cta-box p {
-      font-size: 15px; color: var(--muted2);
-      margin-bottom: 32px; position: relative; line-height: 1.7;
-    }
-    .cta-free-note {
-      margin-top: 14px; font-size: 12px; color: var(--muted);
-    }
+    .back-btn { background: none; border: 1.5px solid #1a2235; border-radius: 10px; color: #64748b; font-size: 13px; font-weight: 600; padding: 10px 18px; cursor: pointer; font-family: inherit; margin-right: 10px; }
+    .new-search-btn { width: 100%; margin-top: 16px; padding: 13px; background: transparent; border: 1.5px solid #1a2235; border-radius: 10px; color: #64748b; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; }
 
-    /* ── FOOTER ── */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 28px 24px;
-      text-align: center;
-      font-size: 13px; color: var(--muted);
-    }
-    footer strong { color: var(--blue); }
+    /* DETAIL */
+    .detail-card { background: #0d1220; border: 1px solid #1a2235; border-radius: 16px; padding: 24px; }
+    .detail-title { font-size: 20px; font-weight: 800; margin-bottom: 5px; line-height: 1.2; }
+    .detail-company { color: #64748b; font-size: 13px; margin-bottom: 16px; }
+    .detail-tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+    .detail-section-label { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 8px; }
+    .detail-desc { color: #64748b; font-size: 13px; line-height: 1.75; margin-bottom: 20px; }
+    .visa-box { background: #080c17; border: 1px solid #1a2235; border-radius: 12px; padding: 14px; margin-bottom: 20px; }
+    .visa-box-title { font-size: 11px; font-weight: 700; color: #3b82f6; margin-bottom: 10px; }
+    .visa-box-items { display: flex; gap: 20px; flex-wrap: wrap; }
+    .apply-btn { display: block; width: 100%; padding: 14px; background: linear-gradient(135deg,#3b82f6,#8b5cf6); border-radius: 10px; color: #fff; font-size: 14px; font-weight: 700; text-align: center; text-decoration: none; }
+    .apply-note { margin-top: 8px; font-size: 11px; color: #475569; text-align: center; }
 
-    /* ── DIVIDER ── */
-    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+    .loading-spinner { text-align: center; padding: 40px 20px; color: #64748b; font-size: 15px; }
+    .spinner { display: inline-block; width: 32px; height: 32px; border: 3px solid #1a2235; border-top-color: #3b82f6; border-radius: 50%; animation: spin 0.8s linear infinite; margin-bottom: 14px; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── MOBILE ── */
-    @media (max-width: 600px) {
-      .stat { padding: 20px 12px; }
-      .stat-val { font-size: 22px; }
-      .cta-box { padding: 36px 24px; }
-      nav { padding: 0 16px; }
-      .nav-badge { display: none; }
-    }
+    @media(max-width:480px) { .countries-grid { grid-template-columns: repeat(2,1fr); } }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <div class="nav-logo-icon">✈</div>
-    <span class="nav-logo-text">VisaJob <span>AI</span></span>
-  </a>
-  <span class="nav-badge">Free Tool</span>
-  <a href="#tool" class="nav-cta">Jobs Dhundho →</a>
+  <div class="logo-icon">✈</div>
+  <span class="logo-text">VisaJob <span>AI</span></span>
+  <span class="live-badge">🟢 Real Jobs Live</span>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-pill">
-    <div class="hero-pill-dot"></div>
-    AI-Powered · Free · Europe Jobs
+<!-- HOME PAGE -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <div class="hero-pill"><div class="pulse"></div> Adzuna API • Real Europe Jobs</div>
+    <h1>Europe ki <span class="grad">Real Jobs</span> dhundho</h1>
+    <p class="hero-sub">Pakistan, India, Bangladesh ke log — field aur country choose karo, real visa-sponsored jobs seedhi Europe se aayengi.</p>
   </div>
-  <h1>
-    Europe mein job chahiye?<br/>
-    <span class="grad">AI dhundhega tumhare liye</span>
-  </h1>
-  <p class="hero-sub">
-    Pakistan, India, Bangladesh ke log — sirf apni field aur country choose karo. VisaJob AI tumhare liye Europe ki visa-sponsored jobs dhundhega — bilkul free.
-  </p>
-  <div class="hero-flags">
-    <div class="flag-chip">🇵🇰 Pakistan</div>
-    <div class="flag-chip">🇮🇳 India</div>
-    <div class="flag-chip">🇧🇩 Bangladesh</div>
-    <div class="flag-chip">🇳🇵 Nepal</div>
-    <span>aur bhi...</span>
-  </div>
-  <div class="hero-btns">
-    <a href="#tool" class="btn-primary">🔍 Free Jobs Dhundho</a>
-    <a href="#how" class="btn-secondary">Kaise Kaam Karta Hai?</a>
-  </div>
-</section>
 
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-val">8</div>
-    <div class="stat-label">European Countries</div>
+  <div class="step-label">Step 1 — Country choose karo</div>
+  <div class="countries-grid" id="countries-grid"></div>
+
+  <div class="step-label">Step 2 — Apni field choose karo</div>
+  <div class="cats-grid" id="cats-grid"></div>
+
+  <div class="visa-info-bar" id="visa-info-bar">
+    <div class="vib-item"><label>Visa</label><span id="vib-visa" style="color:#93c5fd"></span></div>
+    <div class="vib-item"><label>Min Salary</label><span id="vib-salary" style="color:#6ee7b7"></span></div>
+    <div class="vib-item"><label>Language</label><span id="vib-lang" style="color:#fbbf24"></span></div>
   </div>
-  <div class="stat">
-    <div class="stat-val">8</div>
-    <div class="stat-label">Job Categories</div>
-  </div>
-  <div class="stat">
-    <div class="stat-val">100%</div>
-    <div class="stat-label">Visa Sponsored</div>
-  </div>
-  <div class="stat">
-    <div class="stat-val">Free</div>
-    <div class="stat-label">Hamesha</div>
+
+  <button class="search-btn" id="search-btn" onclick="searchJobs()">🔍 Real Jobs Dhundho</button>
+  <div class="error-box" id="error-box"></div>
+
+  <div class="home-stats">
+    <div><div class="stat-val">Live</div><div class="stat-lbl">Real Jobs</div></div>
+    <div><div class="stat-val">6</div><div class="stat-lbl">Countries</div></div>
+    <div><div class="stat-val">Free</div><div class="stat-lbl">Hamesha</div></div>
   </div>
 </div>
 
-<hr class="divider" />
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-  <div class="section-eyebrow">Kaise Kaam Karta Hai</div>
-  <h2 class="section-title">3 steps mein jobs milti hain</h2>
-  <p class="section-sub">Koi complicated process nahi. Bas 3 clicks aur tumhare saamne visa-sponsored jobs hogi.</p>
-
-  <div class="steps">
-    <div class="step-card">
-      <div class="step-icon">🌍</div>
-      <div class="step-title">Country Choose Karo</div>
-      <div class="step-desc">Germany, UK, Netherlands, Poland — jis bhi country mein jaana chahte ho, select karo. Visa info bhi saath dikhai dega.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">💼</div>
-      <div class="step-title">Apni Field Batao</div>
-      <div class="step-desc">IT, Engineering, Nursing, Accounting — 8 categories mein se apni field choose karo. AI specifically tumhare liye jobs dhundhega.</div>
-    </div>
-    <div class="step-card">
-      <div class="step-icon">🤖</div>
-      <div class="step-title">AI Jobs Dhundhega</div>
-      <div class="step-desc">Seconds mein 6 visa-sponsored jobs aayengi — salary, company, location, aur requirements ke saath. Seedha apply kar sakte ho.</div>
-    </div>
+<!-- RESULTS PAGE -->
+<div id="page-results" class="page">
+  <div class="results-header">
+    <button class="back-btn" onclick="showPage('home')">← Wapas</button>
+    <div class="results-title" id="results-title"></div>
+    <div class="results-sub" id="results-sub"></div>
   </div>
-</section>
-
-<hr class="divider" />
-
-<!-- COUNTRIES -->
-<section class="section">
-  <div class="section-eyebrow">Available Countries</div>
-  <h2 class="section-title">Ye 8 countries cover hoti hain</h2>
-  <p class="section-sub">Sab mein visa sponsorship available hai — aur har country ki visa requirement alag alag hai.</p>
-
-  <div class="countries-grid">
-    <div class="country-card">
-      <div class="country-flag">🇩🇪</div>
-      <div class="country-name">Germany</div>
-      <div class="country-visa">EU Blue Card</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇳🇱</div>
-      <div class="country-name">Netherlands</div>
-      <div class="country-visa">Highly Skilled Migrant</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇬🇧</div>
-      <div class="country-name">United Kingdom</div>
-      <div class="country-visa">Skilled Worker Visa</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇵🇱</div>
-      <div class="country-name">Poland</div>
-      <div class="country-visa">Work Permit</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇵🇹</div>
-      <div class="country-name">Portugal</div>
-      <div class="country-visa">D3 Tech Visa</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇸🇪</div>
-      <div class="country-name">Sweden</div>
-      <div class="country-visa">Work Permit</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇩🇰</div>
-      <div class="country-name">Denmark</div>
-      <div class="country-visa">Positive List</div>
-    </div>
-    <div class="country-card">
-      <div class="country-flag">🇫🇷</div>
-      <div class="country-name">France</div>
-      <div class="country-visa">Talent Passport</div>
-    </div>
+  <div class="visa-banner" id="results-visa-banner"></div>
+  <div id="loading-div" class="loading-spinner" style="display:none">
+    <div><div class="spinner"></div><br>Real jobs dhundh raha hai...</div>
   </div>
-</section>
+  <div id="jobs-list"></div>
+  <button class="new-search-btn" onclick="showPage('home')">← Naya Search</button>
+</div>
 
-<hr class="divider" />
-
-<!-- FEATURES -->
-<section class="section">
-  <div class="section-eyebrow">Features</div>
-  <h2 class="section-title">Sirf job list nahi — poori help</h2>
-  <p class="section-sub">Har cheez jo tumhe Europe ki job ke liye chahiye — ek jagah pe.</p>
-
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-emoji">🤖</div>
-      <div>
-        <div class="feature-title">AI Job Matching</div>
-        <div class="feature-desc">Tumhari field ke hisaab se specifically jobs dhundhta hai — generic list nahi deta.</div>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-emoji">✅</div>
-      <div>
-        <div class="feature-title">Sirf Visa Sponsored</div>
-        <div class="feature-desc">Har job mein visa sponsorship confirm hai — time waste nahi hoga un jobs pe jo visa nahi deti.</div>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-emoji">🛂</div>
-      <div>
-        <div class="feature-title">Visa Info Saath</div>
-        <div class="feature-desc">Har country ka visa type, minimum salary, aur language requirement seedha dikhta hai.</div>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-emoji">💰</div>
-      <div>
-        <div class="feature-title">Salary Estimates</div>
-        <div class="feature-desc">Pehle se pata chale ga ke us country mein kitni salary milti hai tumhari field mein.</div>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-emoji">⚡</div>
-      <div>
-        <div class="feature-title">Fast Results</div>
-        <div class="feature-desc">Seconds mein 6 jobs. Koi registration nahi, koi wait nahi.</div>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-emoji">🆓</div>
-      <div>
-        <div class="feature-title">Bilkul Free</div>
-        <div class="feature-desc">Koi hidden charges nahi. Koi credit card nahi. Pakistan, India, BD sab ke liye free.</div>
-      </div>
-    </div>
+<!-- DETAIL PAGE -->
+<div id="page-detail" class="page">
+  <div style="margin-bottom:20px">
+    <button class="back-btn" onclick="showPage('results')">← Wapas</button>
   </div>
-</section>
+  <div class="detail-card" id="detail-content"></div>
+</div>
 
-<hr class="divider" />
+<script>
+const APP_ID = "c1b50a9b";
+const API_KEY = "b16d0df45d5fe74bc32c524b4a221d0e";
 
-<!-- TESTIMONIALS -->
-<section class="section">
-  <div class="section-eyebrow">Log Kya Kehte Hain</div>
-  <h2 class="section-title">Hazaaron log dhundh rahe hain</h2>
-  <p class="section-sub">Pakistan, India aur Bangladesh se log isko use kar rahe hain apna Europe dream poora karne ke liye.</p>
+const COUNTRIES = [
+  { code:"gb", name:"United Kingdom", flag:"🇬🇧", visa:"Skilled Worker Visa", salary:"£26,200/yr", lang:"English required" },
+  { code:"de", name:"Germany", flag:"🇩🇪", visa:"EU Blue Card", salary:"€45,000/yr", lang:"B1 German preferred" },
+  { code:"nl", name:"Netherlands", flag:"🇳🇱", visa:"Highly Skilled Migrant", salary:"€46,000/yr", lang:"English OK" },
+  { code:"pl", name:"Poland", flag:"🇵🇱", visa:"Work Permit", salary:"€18,000/yr", lang:"Polish helpful" },
+  { code:"at", name:"Austria", flag:"🇦🇹", visa:"Red-White-Red Card", salary:"€35,000/yr", lang:"German preferred" },
+  { code:"fr", name:"France", flag:"🇫🇷", visa:"Talent Passport", salary:"€35,000/yr", lang:"French preferred" },
+];
 
-  <div class="testi-grid">
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">"Pehle LinkedIn pe ghanton search karta tha, visa nahi hoti thi. VisaJob AI ne 30 seconds mein Germany ki 6 IT jobs dikh di — sab mein visa sponsorship."</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background: linear-gradient(135deg, #3b82f6, #8b5cf6);">A</div>
+const CATEGORIES = [
+  { label:"Software / IT", icon:"💻", query:"software developer" },
+  { label:"Engineering", icon:"⚙️", query:"engineer" },
+  { label:"Healthcare", icon:"🏥", query:"nurse" },
+  { label:"Accounting", icon:"📊", query:"accountant" },
+  { label:"Construction", icon:"🏗️", query:"construction" },
+  { label:"Hospitality", icon:"🏨", query:"hospitality" },
+  { label:"Education", icon:"📚", query:"teacher" },
+  { label:"Logistics", icon:"🚛", query:"logistics" },
+];
+
+let selectedCountry = null;
+let selectedCategory = null;
+let allJobs = [];
+let selectedJob = null;
+
+// Build country buttons
+const cg = document.getElementById("countries-grid");
+COUNTRIES.forEach(c => {
+  const btn = document.createElement("button");
+  btn.className = "country-btn";
+  btn.innerHTML = `<span class="country-flag">${c.flag}</span><span>${c.name}</span><span class="country-visa-label">${c.visa}</span>`;
+  btn.onclick = () => {
+    document.querySelectorAll(".country-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedCountry = c;
+    updateVisaBar();
+    updateSearchBtn();
+  };
+  cg.appendChild(btn);
+});
+
+// Build category buttons
+const catg = document.getElementById("cats-grid");
+CATEGORIES.forEach(cat => {
+  const btn = document.createElement("button");
+  btn.className = "cat-btn";
+  btn.innerHTML = `<span>${cat.icon}</span><span>${cat.label}</span>`;
+  btn.onclick = () => {
+    document.querySelectorAll(".cat-btn").forEach(b => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    selectedCategory = cat;
+    updateSearchBtn();
+  };
+  catg.appendChild(btn);
+});
+
+function updateVisaBar() {
+  if (!selectedCountry) return;
+  document.getElementById("vib-visa").textContent = selectedCountry.visa;
+  document.getElementById("vib-salary").textContent = selectedCountry.salary;
+  document.getElementById("vib-lang").textContent = selectedCountry.lang;
+  document.getElementById("visa-info-bar").classList.add("show");
+}
+
+function updateSearchBtn() {
+  const btn = document.getElementById("search-btn");
+  if (selectedCountry && selectedCategory) {
+    btn.classList.add("ready");
+    btn.textContent = "🔍 Real Jobs Dhundho";
+  }
+}
+
+function showPage(name) {
+  document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+  document.getElementById("page-" + name).classList.add("active");
+  window.scrollTo(0,0);
+}
+
+function formatSalary(job) {
+  const cur = selectedCountry?.code === "gb" ? "£" : "€";
+  if (job.salary_min && job.salary_max) return `${cur}${Math.round(job.salary_min).toLocaleString()} - ${cur}${Math.round(job.salary_max).toLocaleString()}/yr`;
+  if (job.salary_min) return `${cur}${Math.round(job.salary_min).toLocaleString()}+/yr`;
+  return "Salary negotiable";
+}
+
+function formatDate(d) {
+  if (!d) return "Recently";
+  const diff = Math.floor((new Date() - new Date(d)) / 86400000);
+  if (diff === 0) return "Today";
+  if (diff === 1) return "Yesterday";
+  if (diff < 7) return `${diff} days ago`;
+  if (diff < 30) return `${Math.floor(diff/7)} weeks ago`;
+  return `${Math.floor(diff/30)} months ago`;
+}
+
+async function searchJobs() {
+  if (!selectedCountry || !selectedCategory) return;
+
+  showPage("results");
+  document.getElementById("results-title").textContent = `${selectedCategory.icon} ${selectedCategory.label} Jobs — ${selectedCountry.flag} ${selectedCountry.name}`;
+  document.getElementById("results-sub").textContent = "Jobs load ho rahi hain...";
+  document.getElementById("loading-div").style.display = "block";
+  document.getElementById("jobs-list").innerHTML = "";
+
+  // Visa banner
+  document.getElementById("results-visa-banner").innerHTML = `
+    <div class="vb-item"><label>Visa</label><span style="color:#93c5fd">${selectedCountry.visa}</span></div>
+    <div class="vb-item"><label>Min Salary</label><span style="color:#6ee7b7">${selectedCountry.salary}</span></div>
+    <div class="vb-item"><label>Language</label><span style="color:#fbbf24">${selectedCountry.lang}</span></div>
+  `;
+
+  try {
+    const q = encodeURIComponent(selectedCategory.query);
+    const url = `https://api.adzuna.com/v1/api/jobs/${selectedCountry.code}/search/1?app_id=${APP_ID}&app_key=${API_KEY}&results_per_page=10&what=${q}&content-type=application/json`;
+    const res = await fetch(url);
+    const data = await res.json();
+    document.getElementById("loading-div").style.display = "none";
+
+    if (data.results && data.results.length > 0) {
+      allJobs = data.results;
+      document.getElementById("results-sub").textContent = `${data.results.length} real jobs mili hain · ${(data.count||0).toLocaleString()} total available`;
+      renderJobs(data.results);
+    } else {
+      document.getElementById("results-sub").textContent = "Koi job nahi mili — doosri category try karein";
+      document.getElementById("jobs-list").innerHTML = `<div style="text-align:center;padding:40px;color:#475569">😔 Is search mein koi job nahi mili.<br><br>Doosri field ya country try karein.</div>`;
+    }
+  } catch(e) {
+    document.getElementById("loading-div").style.display = "none";
+    document.getElementById("results-sub").textContent = "Error — dobara try karein";
+    document.getElementById("jobs-list").innerHTML = `<div style="text-align:center;padding:40px;color:#f87171">⚠️ Jobs load nahi huin. Internet check karein.</div>`;
+  }
+}
+
+function renderJobs(jobs) {
+  const list = document.getElementById("jobs-list");
+  list.innerHTML = "";
+  jobs.forEach((job, i) => {
+    const card = document.createElement("div");
+    card.className = "job-card";
+    card.innerHTML = `
+      <div class="job-card-top">
         <div>
-          <div class="testi-name">Ahmed Raza</div>
-          <div class="testi-loc">🇵🇰 Lahore, Pakistan</div>
+          <div class="job-title">${job.title}</div>
+          <div class="job-company">${job.company?.display_name || "Company"}</div>
         </div>
+        <span class="real-badge">✅ Real</span>
+      </div>
+      <div class="job-tags">
+        <span class="tag">📍 ${job.location?.display_name || "Europe"}</span>
+        <span class="tag">💰 ${formatSalary(job)}</span>
+        <span class="tag">🕐 ${formatDate(job.created)}</span>
+      </div>
+      ${job.description ? `<div class="job-desc">${job.description.substring(0,130)}...</div>` : ""}
+      <div class="job-cta">Details aur Apply →</div>
+    `;
+    card.onclick = () => showDetail(job);
+    list.appendChild(card);
+  });
+}
+
+function showDetail(job) {
+  selectedJob = job;
+  const c = selectedCountry;
+  document.getElementById("detail-content").innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:16px;flex-wrap:wrap">
+      <div>
+        <div class="detail-title">${job.title}</div>
+        <div class="detail-company">${job.company?.display_name || "Company"} · ${job.location?.display_name || ""}</div>
+      </div>
+      <span class="real-badge" style="padding:4px 12px;font-size:11px">✅ Real Job</span>
+    </div>
+    <div class="detail-tags">
+      <span class="tag">💰 ${formatSalary(job)}</span>
+      <span class="tag">🕐 ${formatDate(job.created)}</span>
+      <span class="tag">📋 ${job.contract_time || "Full-time"}</span>
+    </div>
+    ${job.description ? `
+      <div class="detail-section-label">Job Description</div>
+      <div class="detail-desc">${job.description.length > 600 ? job.description.substring(0,600)+"..." : job.description}</div>
+    ` : ""}
+    <div class="visa-box">
+      <div class="visa-box-title">🛂 ${c.name} Visa Info</div>
+      <div class="visa-box-items">
+        <div class="vib-item"><label>Visa</label><span style="color:#93c5fd">${c.visa}</span></div>
+        <div class="vib-item"><label>Min Salary</label><span style="color:#6ee7b7">${c.salary}</span></div>
+        <div class="vib-item"><label>Language</label><span style="color:#fbbf24">${c.lang}</span></div>
       </div>
     </div>
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">"Netherlands mein nursing jobs dhundh rahi thi. Yahan se pata chala ke language requirement kya hai aur minimum salary kitni hai. Bohot helpful!"</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background: linear-gradient(135deg, #10b981, #3b82f6);">P</div>
-        <div>
-          <div class="testi-name">Priya Sharma</div>
-          <div class="testi-loc">🇮🇳 Delhi, India</div>
-        </div>
-      </div>
-    </div>
-    <div class="testi-card">
-      <div class="stars">★★★★★</div>
-      <p class="testi-text">"Germany Blue Card ke baare mein pata hi nahi tha. VisaJob AI se samajh aaya ke kaise apply karna hai aur kya requirements hain. Free mein itni info!"</p>
-      <div class="testi-author">
-        <div class="testi-avatar" style="background: linear-gradient(135deg, #f59e0b, #ef4444);">R</div>
-        <div>
-          <div class="testi-name">Rahim Uddin</div>
-          <div class="testi-loc">🇧🇩 Dhaka, Bangladesh</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="divider" />
-
-<!-- CTA -->
-<section class="cta-section" id="tool">
-  <div class="cta-box">
-    <div class="cta-glow"></div>
-    <h2>Abhi Shuru Karo — Free Hai</h2>
-    <p>Apni country aur field choose karo. AI 30 seconds mein Europe ki visa-sponsored jobs dhundhega sirf tumhare liye.</p>
-    <a href="YOUR_TOOL_LINK_HERE" class="btn-primary" style="font-size: 16px; padding: 16px 40px;">
-      🔍 Jobs Dhundho — Free
-    </a>
-    <div class="cta-free-note">✓ Koi signup nahi &nbsp;·&nbsp; ✓ Koi credit card nahi &nbsp;·&nbsp; ✓ 100% Free</div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p>Made with ❤️ for <strong>Pakistan 🇵🇰 · India 🇮🇳 · Bangladesh 🇧🇩</strong> &nbsp;|&nbsp; <strong>VisaJob AI</strong> &nbsp;|&nbsp; Europe Jobs Platform</p>
-  <p style="margin-top: 8px; font-size: 11px; color: #374151;">Jobs shown are AI-generated examples. Always verify directly with employers. Not legal immigration advice.</p>
-</footer>
-
+    <a href="${job.redirect_url}" target="_blank" rel="noopener noreferrer" class="apply-btn">Apply Now — Real Company ↗</a>
+    <div class="apply-note">Ye real job hai — seedha company ki website pe jaoge</div>
+  `;
+  showPage("detail");
+}
+</script>
 </body>
 </html>
