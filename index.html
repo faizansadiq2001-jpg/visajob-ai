@@ -1,110 +1,124 @@
-           <!DOCTYPE html>
+             <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>VisaJob AI — Europe Jobs for Pakistan & India</title>
-  <meta name="description" content="Europe mein visa sponsored jobs dhundho. Driver, Factory Worker, Welder, Caregiver — sab ke liye. Free AI CV checker bhi."/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     :root{--bg:#080c17;--bg2:#0d1220;--bg3:#111827;--border:#1a2235;--blue:#3b82f6;--purple:#8b5cf6;--green:#10b981;--yellow:#f59e0b;--text:#e2e8f0;--muted:#64748b;--muted2:#94a3b8}
     html{scroll-behavior:smooth}
     body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6;overflow-x:hidden}
-    nav{position:sticky;top:0;z-index:100;background:rgba(8,12,23,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;height:58px;gap:10px}
+    nav{position:sticky;top:0;z-index:100;background:rgba(8,12,23,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 20px;display:flex;align-items:center;height:58px;gap:10px}
     .logo{display:flex;align-items:center;gap:9px;text-decoration:none}
-    .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-    .logo-text{font-weight:800;font-size:17px;letter-spacing:-.3px;color:var(--text)}
+    .logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--blue),var(--purple));border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:16px}
+    .logo-text{font-weight:800;font-size:17px;color:var(--text)}
     .logo-text span{color:var(--blue)}
     .nav-links{margin-left:auto;display:flex;gap:6px;align-items:center}
-    .nav-link{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 12px;border-radius:8px;transition:color .15s}
-    .nav-link:hover{color:var(--text)}
-    .nav-cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:13px;font-weight:700;padding:7px 16px;border-radius:8px;text-decoration:none;white-space:nowrap}
-    section{padding:64px 20px}
-    .container{max-width:780px;margin:0 auto}
-    .section-pill{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--blue);font-weight:600;margin-bottom:16px}
-    .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-    h2.section-title{font-size:clamp(26px,4vw,36px);font-weight:900;letter-spacing:-1px;margin-bottom:10px}
-    .section-sub{font-size:15px;color:var(--muted2);max-width:500px;line-height:1.7}
+    .nav-link{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px}
+    .nav-cta{background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:13px;font-weight:700;padding:7px 16px;border-radius:8px;text-decoration:none}
+    .container{max-width:760px;margin:0 auto;padding:0 20px}
     .grad{background:linear-gradient(90deg,var(--blue),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-    #hero{padding:56px 20px 48px;text-align:center}
-    .hero-flags{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:24px}
-    .flag-chip{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px;display:flex;align-items:center;gap:6px}
-    #hero h1{font-size:clamp(32px,6vw,54px);font-weight:900;line-height:1.1;letter-spacing:-2px;margin-bottom:16px}
-    .hero-sub{font-size:16px;color:var(--muted2);max-width:520px;margin:0 auto 28px;line-height:1.7}
-    .trust-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:32px}
-    .badge{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--muted2);display:flex;align-items:center;gap:6px}
-    .badge-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-    .search-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:24px;max-width:620px;margin:0 auto}
+    .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite;display:inline-block}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+    .pill{display:inline-flex;align-items:center;gap:7px;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--blue);font-weight:600;margin-bottom:14px}
+
+    /* HERO */
+    #hero{padding:52px 20px 44px;text-align:center}
+    .flags{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;margin-bottom:22px}
+    .flag-chip{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:4px 12px;font-size:13px}
+    #hero h1{font-size:clamp(30px,6vw,52px);font-weight:900;line-height:1.1;letter-spacing:-2px;margin-bottom:14px}
+    .hero-sub{font-size:15px;color:var(--muted2);max-width:500px;margin:0 auto 26px;line-height:1.7}
+    .badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:30px}
+    .badge{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:12px;color:var(--muted2);display:flex;align-items:center;gap:5px}
+    .bdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+
+    /* SEARCH */
+    .search-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:22px;max-width:600px;margin:0 auto}
     .search-row{display:flex;gap:10px;flex-wrap:wrap}
-    .input-wrap{flex:1;min-width:200px}
-    .input-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;display:block}
-    .search-input{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
-    .search-input:focus{border-color:var(--blue)}
-    .search-input::placeholder{color:var(--muted)}
-    .country-select{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;cursor:pointer}
-    .find-btn{width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s}
+    .inp-wrap{flex:1;min-width:180px}
+    .inp-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px;display:block}
+    .inp{width:100%;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-size:14px;font-family:inherit;outline:none;transition:border-color .15s}
+    .inp:focus{border-color:var(--blue)}
+    .inp::placeholder{color:var(--muted)}
+    select.inp{cursor:pointer}
+    .find-btn{width:100%;margin-top:12px;padding:13px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:11px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
     .find-btn:hover{opacity:.9}
-    #how{background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-    .steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:36px}
-    .step-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center}
-    .step-num{font-size:28px;margin-bottom:12px}
-    .step-title{font-size:15px;font-weight:700;margin-bottom:6px}
-    .step-desc{font-size:13px;color:var(--muted2);line-height:1.6}
-    #results-section{display:none;padding:32px 20px}
-    .results-header-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px}
-    .visa-strip{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:12px 16px;margin-bottom:16px;display:flex;gap:20px;flex-wrap:wrap}
-    .vis-item label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:2px}
-    .job-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:14px;padding:18px;margin-bottom:10px;transition:border-color .15s}
+
+    /* HOW */
+    #how{padding:56px 20px;background:var(--bg2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+    .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:32px}
+    .step{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:22px 18px;text-align:center}
+    .step-ico{font-size:26px;margin-bottom:10px}
+    .step-t{font-size:14px;font-weight:700;margin-bottom:5px}
+    .step-d{font-size:12px;color:var(--muted2);line-height:1.6}
+
+    /* RESULTS */
+    #results-sec{display:none;padding:28px 20px}
+    .res-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:8px;flex-wrap:wrap}
+    .res-title{font-size:18px;font-weight:800}
+    .res-count{font-size:12px;color:var(--muted2);margin-top:3px}
+    .back-btn{background:var(--bg2);border:1px solid var(--border);color:var(--muted2);padding:7px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-family:inherit;white-space:nowrap}
+    .visa-strip{background:var(--bg2);border:1px solid var(--border);border-radius:11px;padding:11px 15px;margin-bottom:14px;display:flex;gap:18px;flex-wrap:wrap}
+    .vs-item label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;display:block;margin-bottom:2px}
+    .job-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:13px;padding:16px;margin-bottom:9px;transition:border-color .15s}
     .job-card:hover{border-color:var(--blue)}
-    .jc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px}
-    .jc-title{font-weight:700;font-size:14px;line-height:1.3;margin-bottom:3px}
-    .jc-company{color:var(--muted);font-size:12px}
-    .visa-badge{background:#0f2a1a;border:1px solid #166534;color:#6ee7b7;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0}
-    .jc-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-    .tag{background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:3px 10px;border-radius:20px;font-size:11px}
-    .jc-desc{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:12px}
-    .apply-link{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:12px;font-weight:700;padding:8px 18px;border-radius:8px;text-decoration:none}
-    .apply-link:hover{opacity:.88}
-    .loader{text-align:center;padding:40px 20px;display:none}
-    .spinner{display:inline-block;width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:12px}
+    .jc-top{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:7px}
+    .jc-title{font-weight:700;font-size:14px;line-height:1.3;margin-bottom:2px}
+    .jc-co{color:var(--muted);font-size:12px}
+    .vbadge{background:#0f2a1a;border:1px solid #166534;color:#6ee7b7;padding:2px 9px;border-radius:20px;font-size:10px;font-weight:700;white-space:nowrap;flex-shrink:0}
+    .jc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+    .tag{background:var(--bg3);border:1px solid var(--border);color:var(--muted);padding:2px 9px;border-radius:20px;font-size:11px}
+    .jc-desc{color:var(--muted);font-size:12px;line-height:1.6;margin-bottom:10px}
+    .apply-btn{display:inline-block;background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;font-size:12px;font-weight:700;padding:7px 16px;border-radius:8px;text-decoration:none}
+    .loader{text-align:center;padding:40px;display:none}
+    .spinner{display:inline-block;width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:10px}
     @keyframes spin{to{transform:rotate(360deg)}}
-    .loader p{color:var(--muted);font-size:14px}
-    .err-box{background:#1a0d0d;border:1px solid #4a1a1a;border-radius:10px;padding:14px;color:#f87171;font-size:13px;margin-top:10px;display:none}
-    #cv-section{border-top:1px solid var(--border)}
-    .cv-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px;max-width:620px;margin:36px auto 0}
-    .upload-area{border:2px dashed var(--border);border-radius:14px;padding:36px 20px;text-align:center;cursor:pointer;transition:border-color .15s;position:relative}
-    .upload-area:hover{border-color:var(--blue)}
-    .upload-area input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-    .upload-icon{font-size:36px;margin-bottom:10px}
-    .upload-title{font-size:15px;font-weight:700;margin-bottom:6px}
-    .upload-sub{font-size:13px;color:var(--muted)}
-    .cv-check-btn{width:100%;margin-top:14px;padding:14px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:12px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;display:none}
+    .loader p{color:var(--muted);font-size:13px}
+    .err{background:#1a0d0d;border:1px solid #4a1a1a;border-radius:10px;padding:12px;color:#f87171;font-size:13px;margin-top:10px;display:none}
+
+    /* CV CHECKER */
+    #cv-sec{padding:56px 20px;border-top:1px solid var(--border)}
+    .cv-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;padding:26px;max-width:600px;margin:28px auto 0}
+    .cv-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+    .cv-field{display:flex;flex-direction:column;gap:5px}
+    .cv-field label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+    .cv-inp{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;color:var(--text);font-size:13px;font-family:inherit;outline:none;transition:border-color .15s;width:100%}
+    .cv-inp:focus{border-color:var(--blue)}
+    .cv-inp::placeholder{color:var(--muted)}
+    select.cv-inp{cursor:pointer}
+    .cv-field.full{grid-column:1/-1}
+    .cv-check-btn{width:100%;margin-top:14px;padding:13px;background:linear-gradient(135deg,var(--blue),var(--purple));border:none;border-radius:11px;color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+    .cv-check-btn:hover{opacity:.9}
+
+    /* CV RESULTS */
     .cv-results{margin-top:20px;display:none}
-    .score-wrap{text-align:center;margin-bottom:24px}
-    .score-circle{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;position:relative}
-    .score-inner{width:90px;height:90px;background:var(--bg2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
-    .score-num{font-size:28px;font-weight:900}
-    .score-lbl-small{font-size:10px;color:var(--muted);font-weight:600}
-    .score-title{font-size:16px;font-weight:700;margin-bottom:4px}
+    .score-wrap{text-align:center;margin-bottom:22px}
+    .score-circle{width:110px;height:110px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px}
+    .score-inner{width:82px;height:82px;background:var(--bg2);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center}
+    .score-num{font-size:26px;font-weight:900}
+    .score-lbl{font-size:9px;color:var(--muted);font-weight:700;letter-spacing:.05em}
+    .score-title{font-size:15px;font-weight:800;margin-bottom:3px}
     .score-msg{font-size:13px;color:var(--muted2)}
-    .imp-list{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:16px}
-    .imp-item{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+    .small-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px}
+    .imp-list{background:var(--bg);border:1px solid var(--border);border-radius:13px;padding:16px}
+    .imp-item{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
     .imp-item:last-child{border-bottom:none;padding-bottom:0}
-    .imp-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-    .imp-body strong{color:var(--text);font-size:13px;display:block;margin-bottom:2px}
-    .imp-body span{font-size:12px;color:var(--muted2);line-height:1.6}
-    .rec-list{background:var(--bg);border:1px solid var(--border);border-radius:14px;padding:18px}
-    .rec-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--border);gap:10px}
+    .imp-ico{font-size:15px;flex-shrink:0;margin-top:1px}
+    .imp-t{font-size:13px;font-weight:700;color:var(--text);margin-bottom:2px}
+    .imp-d{font-size:12px;color:var(--muted2);line-height:1.55}
+    .rec-list{background:var(--bg);border:1px solid var(--border);border-radius:13px;padding:16px}
+    .rec-item{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);gap:8px}
     .rec-item:last-child{border-bottom:none;padding-bottom:0}
-    .rec-title{font-size:13px;font-weight:700;margin-bottom:2px}
-    .rec-country{font-size:11px;color:var(--muted)}
-    .match-badge{font-size:12px;font-weight:700;color:var(--green);background:#0f2a1a;border:1px solid #166534;padding:3px 10px;border-radius:20px;white-space:nowrap}
-    .section-small-label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px}
-    footer{border-top:1px solid var(--border);padding:28px 20px;text-align:center;font-size:13px;color:var(--muted)}
+    .rec-t{font-size:13px;font-weight:700;margin-bottom:2px}
+    .rec-c{font-size:11px;color:var(--muted)}
+    .match{font-size:12px;font-weight:700;color:var(--green);background:#0f2a1a;border:1px solid #166534;padding:3px 9px;border-radius:20px;white-space:nowrap}
+    .reset-btn{width:100%;margin-top:14px;padding:11px;background:transparent;border:1.5px solid var(--border);border-radius:11px;color:var(--muted);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit}
+
+    footer{border-top:1px solid var(--border);padding:24px 20px;text-align:center;font-size:12px;color:var(--muted)}
     footer strong{color:var(--blue)}
-    @media(max-width:500px){.search-row{flex-direction:column}.nav-link{display:none}}
+    @media(max-width:480px){.cv-form-grid{grid-template-columns:1fr}.search-row{flex-direction:column}.nav-link{display:none}}
   </style>
 </head>
 <body>
@@ -116,14 +130,15 @@
   </a>
   <div class="nav-links">
     <a href="#how" class="nav-link">Kaise Kaam Karta Hai</a>
-    <a href="#cv-section" class="nav-link">CV Check</a>
-    <a href="#search-section" class="nav-cta">Jobs Dhundho</a>
+    <a href="#cv-sec" class="nav-link">CV Check</a>
+    <a href="#hero" class="nav-cta">Jobs Dhundho</a>
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="hero">
   <div class="container">
-    <div class="hero-flags">
+    <div class="flags">
       <div class="flag-chip">🇵🇰 Pakistan</div>
       <div class="flag-chip">🇮🇳 India</div>
       <div class="flag-chip">🇧🇩 Bangladesh</div>
@@ -131,22 +146,23 @@
     </div>
     <h1>Europe mein<br/><span class="grad">Naukri Dhundho</span><br/>Bilkul Free</h1>
     <p class="hero-sub">Driver, Factory Worker, Welder, Caregiver — har kaam ke liye Europe ki real visa-sponsored jobs. Matric pass ho ya Graduate — sab ke liye hai.</p>
-    <div class="trust-badges">
-      <div class="badge"><div class="badge-dot" style="background:#10b981"></div>Real Jobs</div>
-      <div class="badge"><div class="badge-dot" style="background:#3b82f6"></div>Roz Update</div>
-      <div class="badge"><div class="badge-dot" style="background:#8b5cf6"></div>AI Powered</div>
-      <div class="badge"><div class="badge-dot" style="background:#f59e0b"></div>Visa Sponsored</div>
-      <div class="badge"><div class="badge-dot" style="background:#10b981"></div>100% Free</div>
+    <div class="badges">
+      <div class="badge"><div class="bdot" style="background:#10b981"></div>Real Jobs</div>
+      <div class="badge"><div class="bdot" style="background:#3b82f6"></div>Roz Update</div>
+      <div class="badge"><div class="bdot" style="background:#8b5cf6"></div>AI Powered</div>
+      <div class="badge"><div class="bdot" style="background:#f59e0b"></div>Visa Sponsored</div>
+      <div class="badge"><div class="bdot" style="background:#10b981"></div>100% Free</div>
     </div>
+
     <div class="search-box" id="search-section">
       <div class="search-row">
-        <div class="input-wrap">
-          <label class="input-label">Kya kaam chahiye?</label>
-          <input type="text" id="job-input" class="search-input" placeholder="Driver, Welder, Cleaner, Nurse..."/>
+        <div class="inp-wrap">
+          <label class="inp-label">Kya kaam chahiye?</label>
+          <input type="text" id="job-inp" class="inp" placeholder="Driver, Welder, Cleaner, Nurse..."/>
         </div>
-        <div class="input-wrap">
-          <label class="input-label">Konsi country?</label>
-          <select id="country-select" class="country-select">
+        <div class="inp-wrap">
+          <label class="inp-label">Konsi country?</label>
+          <select id="country-sel" class="inp">
             <option value="gb">🇬🇧 United Kingdom</option>
             <option value="de">🇩🇪 Germany</option>
             <option value="nl">🇳🇱 Netherlands</option>
@@ -161,30 +177,29 @@
   </div>
 </section>
 
+<!-- HOW IT WORKS -->
 <section id="how">
   <div class="container">
-    <div class="section-pill"><div class="pulse"></div>Simple Process</div>
-    <h2 class="section-title">3 Steps mein job milti hai</h2>
-    <p class="section-sub">Koi complicated process nahi — seedha aur simple.</p>
-    <div class="steps-grid">
-      <div class="step-card"><div class="step-num">🔍</div><div class="step-title">Job Title Likho</div><div class="step-desc">Driver, Welder, Cleaner, Nurse — jo bhi kaam aata hai wo likho aur country choose karo.</div></div>
-      <div class="step-card"><div class="step-num">📋</div><div class="step-title">Jobs Dekho</div><div class="step-desc">Real European companies ki jobs aayengi — salary, location, aur visa info ke saath.</div></div>
-      <div class="step-card"><div class="step-num">✅</div><div class="step-title">Apply Karo</div><div class="step-desc">Seedha company ki website pe jaao aur apply karo. Koi middleman nahi.</div></div>
+    <div class="pill"><div class="pulse"></div>Simple Process</div>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-1px;margin-bottom:8px">3 Steps mein job milti hai</h2>
+    <p style="font-size:14px;color:var(--muted2)">Koi complicated process nahi — seedha aur simple.</p>
+    <div class="steps">
+      <div class="step"><div class="step-ico">🔍</div><div class="step-t">Job Title Likho</div><div class="step-d">Driver, Welder, Cleaner, Cook — jo bhi kaam aata hai wo likho aur country choose karo.</div></div>
+      <div class="step"><div class="step-ico">📋</div><div class="step-t">Jobs Dekho</div><div class="step-d">Real European companies ki jobs aayengi — salary, location, aur visa info ke saath.</div></div>
+      <div class="step"><div class="step-ico">✅</div><div class="step-t">Apply Karo</div><div class="step-d">Seedha company ki website pe jaao aur apply karo. Koi middleman nahi.</div></div>
     </div>
   </div>
 </section>
 
-<section id="results-section">
+<!-- RESULTS -->
+<section id="results-sec">
   <div class="container">
     <div class="loader" id="loader"><div class="spinner"></div><p>Real jobs dhundh raha hai Europe se...</p></div>
-    <div class="err-box" id="err-box"></div>
+    <div class="err" id="err-box"></div>
     <div id="results-wrap" style="display:none">
-      <div class="results-header-bar">
-        <div>
-          <div style="font-size:18px;font-weight:800" id="results-title"></div>
-          <div style="font-size:13px;color:var(--muted2);margin-top:3px" id="results-count"></div>
-        </div>
-        <button onclick="scrollToSearch()" style="background:var(--bg2);border:1px solid var(--border);color:var(--muted2);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit">← Naya Search</button>
+      <div class="res-top">
+        <div><div class="res-title" id="res-title"></div><div class="res-count" id="res-count"></div></div>
+        <button class="back-btn" onclick="newSearch()">← Naya Search</button>
       </div>
       <div class="visa-strip" id="visa-strip"></div>
       <div id="jobs-list"></div>
@@ -192,36 +207,98 @@
   </div>
 </section>
 
-<section id="cv-section">
+<!-- CV CHECKER -->
+<section id="cv-sec">
   <div class="container">
-    <div class="section-pill">🤖 AI Powered</div>
-    <h2 class="section-title">Free <span class="grad">CV Checker</span></h2>
-    <p class="section-sub">Apna CV upload karo — AI check karega score, 5 improvements, aur best matching jobs.</p>
+    <div class="pill">🤖 AI Powered</div>
+    <h2 class="section-title" style="font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-1px;margin-bottom:8px">Free <span class="grad">CV Checker</span></h2>
+    <p style="font-size:14px;color:var(--muted2);max-width:480px;line-height:1.7">Apni details bharo — AI turant batayega score, 5 improvements, aur best matching European jobs.</p>
+
     <div class="cv-box">
-      <div class="upload-area" id="upload-area">
-        <input type="file" id="cv-file" accept=".pdf,.doc,.docx,.txt" onchange="fileSelected(this)"/>
-        <div class="upload-icon">📄</div>
-        <div class="upload-title">CV yahan upload karo</div>
-        <div class="upload-sub">PDF, DOC, DOCX — tap karke select karo</div>
+      <div id="cv-form-area">
+        <div class="cv-form-grid">
+          <div class="cv-field">
+            <label>Tumhara Naam</label>
+            <input type="text" id="cv-name" class="cv-inp" placeholder="Ahmed Ali"/>
+          </div>
+          <div class="cv-field">
+            <label>Education</label>
+            <select id="cv-edu" class="cv-inp">
+              <option value="">Select karo...</option>
+              <option>Matric (10th)</option>
+              <option>Inter (12th / FA / FSc)</option>
+              <option>Diploma / Technical</option>
+              <option>Bachelor's Degree</option>
+              <option>Master's Degree</option>
+            </select>
+          </div>
+          <div class="cv-field">
+            <label>Job / Profession</label>
+            <input type="text" id="cv-job" class="cv-inp" placeholder="Driver, Welder, Nurse, Cook..."/>
+          </div>
+          <div class="cv-field">
+            <label>Experience (Years)</label>
+            <select id="cv-exp" class="cv-inp">
+              <option value="">Select karo...</option>
+              <option>0-1 saal (Fresher)</option>
+              <option>1-3 saal</option>
+              <option>3-5 saal</option>
+              <option>5-10 saal</option>
+              <option>10+ saal</option>
+            </select>
+          </div>
+          <div class="cv-field">
+            <label>English Level</label>
+            <select id="cv-eng" class="cv-inp">
+              <option value="">Select karo...</option>
+              <option>Bilkul nahi aati</option>
+              <option>Thodi basic English</option>
+              <option>Medium — samajh aata hai</option>
+              <option>Acha — baat kar sakta hun</option>
+              <option>Fluent</option>
+            </select>
+          </div>
+          <div class="cv-field">
+            <label>Target Country</label>
+            <select id="cv-country" class="cv-inp">
+              <option value="gb">🇬🇧 United Kingdom</option>
+              <option value="de">🇩🇪 Germany</option>
+              <option value="nl">🇳🇱 Netherlands</option>
+              <option value="pl">🇵🇱 Poland</option>
+              <option value="at">🇦🇹 Austria</option>
+              <option value="fr">🇫🇷 France</option>
+            </select>
+          </div>
+          <div class="cv-field full">
+            <label>Extra Skills (optional)</label>
+            <input type="text" id="cv-skills" class="cv-inp" placeholder="Forklift, Heavy License, First Aid, Cooking..."/>
+          </div>
+          <div class="cv-field full">
+            <label>Koi Certificate / License hai? (optional)</label>
+            <input type="text" id="cv-cert" class="cv-inp" placeholder="Driving License, HGV, Welding Certificate..."/>
+          </div>
+        </div>
+        <button class="cv-check-btn" onclick="checkCV()">🤖 AI se CV Check Karo — Free</button>
       </div>
-      <div id="file-show" style="margin-top:10px;font-size:13px;color:var(--green);display:none"></div>
-      <button class="cv-check-btn" id="cv-btn" onclick="checkCV()">🤖 AI se CV Check Karo — Free</button>
-      <div class="loader" id="cv-loader"><div class="spinner"></div><p>AI aapka CV analyze kar raha hai...</p></div>
+
+      <div class="loader" id="cv-loader"><div class="spinner"></div><p>AI analyze kar raha hai...</p></div>
+
       <div class="cv-results" id="cv-results">
         <div class="score-wrap">
           <div class="score-circle" id="score-circle">
             <div class="score-inner">
               <div class="score-num" id="score-num">--</div>
-              <div class="score-lbl-small">SCORE</div>
+              <div class="score-lbl">SCORE</div>
             </div>
           </div>
           <div class="score-title" id="score-title"></div>
           <div class="score-msg" id="score-msg"></div>
         </div>
-        <div class="section-small-label">5 Improvements</div>
+        <div class="small-label">5 Improvements</div>
         <div class="imp-list" id="imp-list"></div>
-        <div class="section-small-label">Best Matching Jobs</div>
+        <div class="small-label">Best Matching Jobs</div>
         <div class="rec-list" id="rec-list"></div>
+        <button class="reset-btn" onclick="resetCV()">← Dobara Check Karo</button>
       </div>
     </div>
   </div>
@@ -229,73 +306,83 @@
 
 <footer>
   <p>Made with ❤️ for <strong>Pakistan 🇵🇰 · India 🇮🇳 · Bangladesh 🇧🇩 · Nepal 🇳🇵</strong></p>
-  <p style="margin-top:8px">Jobs Adzuna se aati hain. Visa advice ke liye immigration lawyer se milein.</p>
+  <p style="margin-top:6px">Jobs Adzuna se aati hain. Visa advice ke liye immigration lawyer se milein.</p>
 </footer>
 
 <script>
-const APP_ID="c1b50a9b",API_KEY="b16d0df45d5fe74bc32c524b4a221d0e";
-const CINFO={gb:{name:"United Kingdom",flag:"🇬🇧",visa:"Skilled Worker Visa",salary:"£26,200/yr",lang:"English required"},de:{name:"Germany",flag:"🇩🇪",visa:"EU Blue Card",salary:"€45,000/yr",lang:"B1 German preferred"},nl:{name:"Netherlands",flag:"🇳🇱",visa:"Highly Skilled Migrant",salary:"€46,000/yr",lang:"English OK"},pl:{name:"Poland",flag:"🇵🇱",visa:"Work Permit",salary:"€18,000/yr",lang:"Polish helpful"},at:{name:"Austria",flag:"🇦🇹",visa:"Red-White-Red Card",salary:"€35,000/yr",lang:"German preferred"},fr:{name:"France",flag:"🇫🇷",visa:"Talent Passport",salary:"€35,000/yr",lang:"French preferred"}};
+const AID="c1b50a9b",AK="b16d0df45d5fe74bc32c524b4a221d0e";
+const CI={gb:{name:"United Kingdom",flag:"🇬🇧",visa:"Skilled Worker Visa",salary:"£26,200/yr",lang:"English required"},de:{name:"Germany",flag:"🇩🇪",visa:"EU Blue Card",salary:"€45,000/yr",lang:"B1 German preferred"},nl:{name:"Netherlands",flag:"🇳🇱",visa:"Highly Skilled Migrant",salary:"€46,000/yr",lang:"English OK"},pl:{name:"Poland",flag:"🇵🇱",visa:"Work Permit",salary:"€18,000/yr",lang:"Polish helpful"},at:{name:"Austria",flag:"🇦🇹",visa:"Red-White-Red Card",salary:"€35,000/yr",lang:"German preferred"},fr:{name:"France",flag:"🇫🇷",visa:"Talent Passport",salary:"€35,000/yr",lang:"French preferred"}};
 
-function scrollToSearch(){document.getElementById('search-section').scrollIntoView({behavior:'smooth'})}
+function newSearch(){document.getElementById('search-section').scrollIntoView({behavior:'smooth'})}
 function fmtSal(j,c){const cur=c==="gb"?"£":"€";if(j.salary_min&&j.salary_max)return`${cur}${Math.round(j.salary_min).toLocaleString()} – ${cur}${Math.round(j.salary_max).toLocaleString()}/yr`;if(j.salary_min)return`${cur}${Math.round(j.salary_min).toLocaleString()}+/yr`;return"Salary negotiable"}
 function fmtDate(d){if(!d)return"Recently";const diff=Math.floor((new Date()-new Date(d))/86400000);if(diff===0)return"Aaj";if(diff===1)return"Kal";if(diff<7)return`${diff} din pehle`;if(diff<30)return`${Math.floor(diff/7)} hafte pehle`;return`${Math.floor(diff/30)} mahine pehle`}
 
 async function findJobs(){
-  const jt=document.getElementById('job-input').value.trim();
-  const cc=document.getElementById('country-select').value;
+  const jt=document.getElementById('job-inp').value.trim();
+  const cc=document.getElementById('country-sel').value;
   if(!jt){alert("Job title likho — jaise Driver, Welder, Nurse");return}
-  const info=CINFO[cc];
-  const rs=document.getElementById('results-section');
+  const info=CI[cc];
+  const rs=document.getElementById('results-sec');
   rs.style.display='block';
   document.getElementById('loader').style.display='block';
   document.getElementById('err-box').style.display='none';
   document.getElementById('results-wrap').style.display='none';
   rs.scrollIntoView({behavior:'smooth'});
   try{
-    const res=await fetch(`https://api.adzuna.com/v1/api/jobs/${cc}/search/1?app_id=${APP_ID}&app_key=${API_KEY}&results_per_page=10&what=${encodeURIComponent(jt)}&content-type=application/json`);
+    const res=await fetch(`https://api.adzuna.com/v1/api/jobs/${cc}/search/1?app_id=${AID}&app_key=${AK}&results_per_page=10&what=${encodeURIComponent(jt)}&content-type=application/json`);
     const data=await res.json();
     document.getElementById('loader').style.display='none';
     if(data.results&&data.results.length>0){
-      document.getElementById('results-title').textContent=`${info.flag} ${jt} Jobs — ${info.name}`;
-      document.getElementById('results-count').textContent=`${data.results.length} jobs mili hain · ${(data.count||0).toLocaleString()} total available`;
-      document.getElementById('visa-strip').innerHTML=`<div class="vis-item"><label>Visa</label><span style="color:#93c5fd;font-size:12px">${info.visa}</span></div><div class="vis-item"><label>Min Salary</label><span style="color:#6ee7b7;font-size:12px">${info.salary}</span></div><div class="vis-item"><label>Language</label><span style="color:#fbbf24;font-size:12px">${info.lang}</span></div>`;
+      document.getElementById('res-title').textContent=`${info.flag} ${jt} Jobs — ${info.name}`;
+      document.getElementById('res-count').textContent=`${data.results.length} jobs mili hain · ${(data.count||0).toLocaleString()} total available`;
+      document.getElementById('visa-strip').innerHTML=`<div class="vs-item"><label>Visa</label><span style="color:#93c5fd;font-size:12px">${info.visa}</span></div><div class="vs-item"><label>Min Salary</label><span style="color:#6ee7b7;font-size:12px">${info.salary}</span></div><div class="vs-item"><label>Language</label><span style="color:#fbbf24;font-size:12px">${info.lang}</span></div>`;
       const list=document.getElementById('jobs-list');list.innerHTML='';
       data.results.forEach(job=>{
         const d=document.createElement('div');d.className='job-card';
-        d.innerHTML=`<div class="jc-top"><div><div class="jc-title">${job.title}</div><div class="jc-company">${job.company?.display_name||'Company'}</div></div><span class="visa-badge">✅ Visa Sponsored</span></div><div class="jc-tags"><span class="tag">📍 ${job.location?.display_name||info.name}</span><span class="tag">💰 ${fmtSal(job,cc)}</span><span class="tag">🕐 ${fmtDate(job.created)}</span></div>${job.description?`<div class="jc-desc">${job.description.substring(0,150)}...</div>`:''}<a href="${job.redirect_url}" target="_blank" rel="noopener noreferrer" class="apply-link">Apply Now ↗</a>`;
+        d.innerHTML=`<div class="jc-top"><div><div class="jc-title">${job.title}</div><div class="jc-co">${job.company?.display_name||'Company'}</div></div><span class="vbadge">✅ Visa Sponsored</span></div><div class="jc-tags"><span class="tag">📍 ${job.location?.display_name||info.name}</span><span class="tag">💰 ${fmtSal(job,cc)}</span><span class="tag">🕐 ${fmtDate(job.created)}</span></div>${job.description?`<div class="jc-desc">${job.description.substring(0,140)}...</div>`:''}<a href="${job.redirect_url}" target="_blank" rel="noopener" class="apply-btn">Apply Now ↗</a>`;
         list.appendChild(d);
       });
       document.getElementById('results-wrap').style.display='block';
     }else{
-      const e=document.getElementById('err-box');e.textContent=`"${jt}" ki koi job nahi mili ${info.name} mein. Doosra job title try karein.`;e.style.display='block';
+      const e=document.getElementById('err-box');e.textContent=`"${jt}" ki koi job nahi mili ${info.name} mein. Doosra title try karein.`;e.style.display='block';
     }
   }catch(err){
     document.getElementById('loader').style.display='none';
     const e=document.getElementById('err-box');e.textContent='Jobs load nahi huin. Internet check karein.';e.style.display='block';
   }
 }
-document.getElementById('job-input').addEventListener('keypress',e=>{if(e.key==='Enter')findJobs()});
-
-let cvText='';
-function fileSelected(inp){
-  const f=inp.files[0];if(!f)return;
-  document.getElementById('file-show').textContent=`✅ ${f.name}`;
-  document.getElementById('file-show').style.display='block';
-  document.getElementById('cv-btn').style.display='block';
-  document.getElementById('upload-area').style.borderColor='var(--green)';
-  const r=new FileReader();
-  r.onload=e=>{cvText=(e.target.result||'').substring(0,3000)};
-  if(f.type==='text/plain')r.readAsText(f);else cvText=`CV: ${f.name} (${(f.size/1024).toFixed(1)}KB)`;
-}
+document.getElementById('job-inp').addEventListener('keypress',e=>{if(e.key==='Enter')findJobs()});
 
 async function checkCV(){
-  const cc=document.getElementById('country-select').value;
-  const info=CINFO[cc];
+  const name=document.getElementById('cv-name').value.trim();
+  const edu=document.getElementById('cv-edu').value;
+  const job=document.getElementById('cv-job').value.trim();
+  const exp=document.getElementById('cv-exp').value;
+  const eng=document.getElementById('cv-eng').value;
+  const cc=document.getElementById('cv-country').value;
+  const skills=document.getElementById('cv-skills').value.trim();
+  const cert=document.getElementById('cv-cert').value.trim();
+  if(!job||!edu||!exp||!eng){alert("Zaroori fields bharo — Job, Education, Experience, aur English level");return}
+  const info=CI[cc];
+  document.getElementById('cv-form-area').style.display='none';
   document.getElementById('cv-loader').style.display='block';
-  document.getElementById('cv-btn').style.display='none';
   document.getElementById('cv-results').style.display='none';
+
+  const prompt=`Analyze this profile for European job applications in ${info.name}:
+Name: ${name||'Not provided'}
+Education: ${edu}
+Job/Profession: ${job}
+Experience: ${exp}
+English Level: ${eng}
+Extra Skills: ${skills||'None mentioned'}
+Certificates/Licenses: ${cert||'None mentioned'}
+Target Country: ${info.name} (${info.visa})
+
+Respond ONLY with valid JSON, no markdown, no backticks:
+{"score":<0-100>,"score_label":"<Excellent/Good/Average/Needs Work>","score_message":"<1 encouraging sentence in simple English>","improvements":[{"title":"<short title>","detail":"<1-2 sentences simple practical advice>"},{"title":"","detail":""},{"title":"","detail":""},{"title":"","detail":""},{"title":"","detail":""}],"recommended_jobs":[{"title":"<job title>","country":"${info.flag} ${info.name}","match":<60-95>},{"title":"","country":"${info.flag} ${info.name}","match":<number>},{"title":"","country":"${info.flag} ${info.name}","match":<number>}]}`;
+
   try{
-    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:`You are a CV analyzer for South Asian job seekers targeting ${info.name}. Respond ONLY with valid JSON, no markdown, no backticks: {"score":<0-100>,"score_label":"<Good/Needs Work/Excellent>","score_message":"<1 sentence in simple English>","improvements":[{"title":"<short>","detail":"<1-2 sentences simple English>"},{"title":"","detail":""},{"title":"","detail":""},{"title":"","detail":""},{"title":"","detail":""}],"recommended_jobs":[{"title":"<job>","country":"${info.flag} ${info.name}","match":<60-95>},{"title":"","country":"${info.flag} ${info.name}","match":<60-95>},{"title":"","country":"${info.flag} ${info.name}","match":<60-95>}]}`,messages:[{role:"user",content:`Analyze this CV for European jobs: ${cvText||'CV uploaded - give general advice for South Asian job seeker targeting Europe'}`}]})});
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,messages:[{role:"user",content:prompt}]})});
     const data=await res.json();
     const txt=data.content?.map(c=>c.text||'').join('')||'';
     const result=JSON.parse(txt.replace(/```json|```/g,'').trim());
@@ -303,8 +390,8 @@ async function checkCV(){
     renderCV(result);
   }catch(e){
     document.getElementById('cv-loader').style.display='none';
-    document.getElementById('cv-btn').style.display='block';
-    alert('CV check nahi hua. Dobara try karein.');
+    document.getElementById('cv-form-area').style.display='block';
+    alert('Check nahi hua. Dobara try karein.');
   }
 }
 
@@ -312,7 +399,8 @@ function renderCV(r){
   const score=r.score||65;
   const deg=(score/100)*360;
   document.getElementById('score-circle').style.background=`conic-gradient(#3b82f6 0deg,#8b5cf6 ${deg}deg,#1a2235 ${deg}deg)`;
-  const sn=document.getElementById('score-num');sn.textContent=score;
+  const sn=document.getElementById('score-num');
+  sn.textContent=score;
   sn.style.color=score>=75?'#10b981':score>=50?'#f59e0b':'#ef4444';
   document.getElementById('score-title').textContent=r.score_label||'Good';
   document.getElementById('score-msg').textContent=r.score_message||'';
@@ -320,18 +408,24 @@ function renderCV(r){
   const il=document.getElementById('imp-list');il.innerHTML='';
   (r.improvements||[]).forEach((imp,i)=>{
     const d=document.createElement('div');d.className='imp-item';
-    d.innerHTML=`<div class="imp-icon">${icons[i]||'✅'}</div><div class="imp-body"><strong>${imp.title}</strong><span>${imp.detail}</span></div>`;
+    d.innerHTML=`<div class="imp-ico">${icons[i]||'✅'}</div><div><div class="imp-t">${imp.title}</div><div class="imp-d">${imp.detail}</div></div>`;
     il.appendChild(d);
   });
   const rl=document.getElementById('rec-list');rl.innerHTML='';
   (r.recommended_jobs||[]).forEach(job=>{
     const d=document.createElement('div');d.className='rec-item';
-    d.innerHTML=`<div><div class="rec-title">${job.title}</div><div class="rec-country">${job.country}</div></div><span class="match-badge">${job.match}% match</span>`;
+    d.innerHTML=`<div><div class="rec-t">${job.title}</div><div class="rec-c">${job.country}</div></div><span class="match">${job.match}% match</span>`;
     rl.appendChild(d);
   });
   document.getElementById('cv-results').style.display='block';
   document.getElementById('cv-results').scrollIntoView({behavior:'smooth'});
 }
+
+function resetCV(){
+  document.getElementById('cv-results').style.display='none';
+  document.getElementById('cv-form-area').style.display='block';
+  document.getElementById('cv-sec').scrollIntoView({behavior:'smooth'});
+}
 </script>
 </body>
-</html> 
+</html>          
